@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Gravitational Caloric Theory: sample slides.">
+  <title>Gravitational Caloric Theory · Sample slides</title>
+  <style>
+    :root { color-scheme: light; --bg: #faf9f6; --ink: #24262b; --muted: #686963; --accent: #862d49; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #ebeae5; color: var(--ink); font-family: "Segoe UI", Arial, sans-serif; }
+    main { width: min(calc(100% - 48px), 1200px); margin: 30px auto; }
+    .slide { min-height: 630px; padding: 70px 80px; background: var(--bg); display: flex; flex-direction: column; justify-content: center; }
+    .slide + .slide { margin-top: 28px; }
+    .slide[hidden] { display: none; }
+    .slide[hidden] + .slide, .slide[hidden] ~ .slide { margin-top: 0; }
+    .eyebrow { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 14px; font-weight: 600; }
+    h1, h2 { margin: 20px 0 30px; font-family: Georgia, serif; font-weight: 400; line-height: 1.15; letter-spacing: -1px; }
+    h1 { font-size: clamp(40px, 5.6vw, 70px); max-width: 850px; }
+    h2 { font-size: clamp(34px, 4.5vw, 52px); }
+    p, li { font-size: 23px; line-height: 1.65; }
+    p { margin: 0 0 18px; max-width: 920px; }
+    .subtitle { color: var(--muted); font-size: 26px; }
+    .author { margin-top: 30px; font-size: 20px; }
+    .author span { display: block; color: var(--muted); font-size: 17px; margin-top: 4px; }
+    .sample-note { color: var(--muted); font-size: 14px; margin-top: 35px; }
+    a { color: var(--accent); text-underline-offset: 5px; }
+    a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+    .controls { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 20px; }
+    .controls[hidden] { display: none; }
+    button { padding: 11px 20px; border: 1px solid #aaa9a1; background: var(--bg); color: var(--ink); font: inherit; border-radius: 3px; cursor: pointer; }
+    button:disabled { opacity: .4; cursor: default; }
+    .counter { color: var(--muted); font-size: 14px; }
+    .hint { margin-top: 16px; color: var(--muted); font-size: 12px; text-align: center; }
+    @media (max-width: 640px) {
+      main { width: calc(100% - 28px); margin: 14px auto; }
+      .slide { min-height: 570px; padding: 35px 24px; }
+      p, li { font-size: 19px; }
+      .subtitle { font-size: 21px; }
+      .eyebrow { font-size: 11px; letter-spacing: 1.4px; }
+      .author { font-size: 18px; }
+      .author span { font-size: 14px; }
+    }
+    @media print {
+      @page { size: A4 landscape; margin: 12mm; }
+      body { background: #fff; }
+      main { width: 100%; margin: 0; }
+      .slide, .slide[hidden] { display: flex !important; min-height: 165mm; margin: 0 !important; padding: 15mm; break-after: page; }
+      .slide:last-of-type { break-after: auto; }
+      .controls, .hint { display: none !important; }
+      h1 { font-size: 45pt; } h2 { font-size: 34pt; } p { font-size: 17pt; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Sample presentation. -->
+  <main>
+    <section class="slide" aria-labelledby="title-1">
+      <p class="eyebrow">Sample presentation</p>
+      <h1 id="title-1">Gravitational Caloric Theory</h1>
+      <p class="subtitle">Gravity, cosmology and astrophysics</p>
+      <p class="author">Shuxun Tian <span>Department of Astronomy, Beijing Normal University</span></p>
+      <p class="sample-note">Demonstration slides. The full presentation will replace this file.</p>
+    </section>
+    <section class="slide" aria-labelledby="title-2">
+      <p class="eyebrow">Research overview</p>
+      <h2 id="title-2">A vector field coupled to matter</h2>
+      <p>Gravitational caloric theory extends general relativity by introducing a vector field sourced by and coupled to the fluid sector.</p>
+      <p>The original motivation was to use the cosmic radiation-matter transition to trigger early dark energy.</p>
+      <p class="sample-note">Early dark energy remains a controversial candidate approach to the Hubble tension.</p>
+    </section>
+    <section class="slide" aria-labelledby="title-3">
+      <p class="eyebrow">Reference</p>
+      <h2 id="title-3">Further reading</h2>
+      <p>S. X. Tian, <em>Gravitational caloric theory: From early dark energy to a wide variety of gravitational phenomena.</em></p>
+      <p><a href="https://link.aps.org/doi/10.1103/ckkf-2t3z" target="_blank" rel="noopener noreferrer">Phys. Rev. D 114, 044042 (2026)</a><br><a href="https://arxiv.org/abs/2608.07318" target="_blank" rel="noopener noreferrer">arXiv:2608.07318</a></p>
+      <p class="sample-note">tshuxun@bnu.edu.cn</p>
+    </section>
+    <nav class="controls" aria-label="Slide navigation" hidden>
+      <button type="button" id="previous">← Previous</button>
+      <span class="counter" id="counter" aria-live="polite" aria-atomic="true"></span>
+      <button type="button" id="next">Next →</button>
+    </nav>
+    <p class="hint">Use the arrow keys or buttons to change slides. Print to save all slides as a PDF.</p>
+  </main>
+  <script>
+    (() => {
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const previous = document.getElementById('previous');
+      const next = document.getElementById('next');
+      let current = 0;
+      document.querySelector('.controls').hidden = false;
+      function render() {
+        const requested = Number(location.hash.slice(1)) || 1;
+        current = Math.min(slides.length - 1, Math.max(0, Math.trunc(requested) - 1));
+        slides.forEach((slide, index) => { slide.hidden = index !== current; });
+        previous.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        document.getElementById('counter').textContent = `${current + 1} / ${slides.length}`;
+        document.title = `${slides[current].querySelector('h1, h2').textContent} · Sample slides`;
+      }
+      function move(offset) { location.hash = String(Math.min(slides.length - 1, Math.max(0, current + offset)) + 1); }
+      previous.addEventListener('click', () => move(-1));
+      next.addEventListener('click', () => move(1));
+      document.addEventListener('keydown', (event) => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+        if (['ArrowRight', 'PageDown'].includes(event.key)) { event.preventDefault(); move(1); }
+        if (['ArrowLeft', 'PageUp'].includes(event.key)) { event.preventDefault(); move(-1); }
+      });
+      window.addEventListener('hashchange', render);
+      render();
+    })();
+  </script>
+</body>
+</html>
