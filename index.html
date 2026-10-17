@@ -288,13 +288,16 @@
         <h2 class="visually-hidden">Talks</h2>
         <!-- Talks: duplicate li.talk-entry; list newest first.
              Update the title, date, city and event.
-             Set data-slides to an asset path; omit it or leave it empty for a plain title.
+             Downloads: <span data-slides="filename.ext"></span> uses a file in assets/; omit the span or leave the filename empty for no button.
              Dates use Month D, YYYY. The entry below is an example. -->
         <ul class="talk-list">
           <li class="talk-entry">
-            <h3 class="talk-title" data-slides="assets/gravitational_caloric_theory.html">
-              Gravitational Caloric Theory
-            </h3>
+            <div class="talk-heading">
+              <h3 class="talk-title">
+                Gravitational Caloric Theory
+              </h3>
+              <span data-slides="gravitational_caloric_theory.html"></span>
+            </div>
             <p class="talk-details">
               <span class="talk-date">October 1, 2026</span> ·
               <span class="talk-city">Beijing</span> ·
@@ -325,6 +328,16 @@
   <footer class="site-footer">
     <span>Last updated: <time id="last-updated"></time></span>
   </footer>
+
+  <!-- Shared download button; entries supply a filename in data-slides. -->
+  <template id="slides-download-template">
+    <a class="slides-download" download>
+      <svg class="slides-download-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M10 3v9m-3-3 3 3 3-3M4 13v3h12v-3"/>
+      </svg>
+      <span>Download Slides</span>
+    </a>
+  </template>
 
   <!-- Shared Dimensions badge; references supply data-citation-doi.
        The fallback link remains until the badge loads. -->
@@ -538,18 +551,19 @@
         });
       }
 
-      // Add a download link only when data-slides specifies an attachment.
+      // Fill the shared download template with a filename from assets/.
       function initTalkDownloads() {
-        document.querySelectorAll('.talk-title').forEach((title) => {
-          const slidesPath = title.dataset.slides?.trim();
-          if (!slidesPath) return;
-          const link = document.createElement('a');
-          link.className = 'slides-link';
-          link.href = slidesPath;
-          link.download = '';
-          link.title = 'Download Slides';
-          link.append(...title.childNodes);
-          title.replaceChildren(link);
+        const downloadTemplate = document.getElementById('slides-download-template').content.firstElementChild;
+        document.querySelectorAll('[data-slides]').forEach((placeholder) => {
+          const filename = placeholder.dataset.slides.trim();
+          if (!filename) {
+            placeholder.remove();
+            return;
+          }
+          const link = downloadTemplate.cloneNode(true);
+          link.href = 'assets/' + encodeURIComponent(filename);
+          link.download = filename;
+          placeholder.replaceWith(link);
         });
       }
 

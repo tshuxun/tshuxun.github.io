@@ -757,6 +757,45 @@ h4, strong {
   font-size: .85em;
 }
 
+.talk-heading {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.slides-download {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  /* Center the compact button on the title's first line. */
+  min-height: calc(var(--entry-title-size) * var(--entry-leading) - 2px);
+  margin-top: 1px;
+  padding: 1px 8px;
+  border: 1px solid #dbe4f2;
+  border-radius: var(--nav-radius);
+  background: #f3f6fc;
+  color: var(--link);
+  font-size: 12px;
+  font-weight: var(--weight-medium);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.slides-download:hover, .slides-download:focus-visible {
+  border-color: #b8c9eb;
+  background: #eaf0fc;
+}
+
+.slides-download-icon {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  /* Optical alignment with the button label. */
+  transform: translateY(1px);
+}
+
 /* Talks and teaching */
 
 .course-entry {
