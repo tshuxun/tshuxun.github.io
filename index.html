@@ -21,7 +21,7 @@
   <header class="site-header">
     <div class="header-inner">
       <div class="brand-group">
-        <a class="brand" href="index.html" aria-label="Shuxun Tian, home">
+        <a class="brand" href="./" aria-label="Shuxun Tian, home">
           <span class="brand-name">Shuxun Tian</span>
         </a>
         <!-- Decorative Solar System sketch. -->
@@ -375,6 +375,7 @@
         document.head.prepend(base);
         const siteRoot = new URL('.', base.href);
         const isLocalFile = location.protocol === 'file:';
+        if (isLocalFile) document.querySelector('.brand').href = 'index.html';
 
         // Derive all public paths from the existing page and panel structure.
         const pathsById = new Map(pages.map((page) => [page.id, new URL(page.id, siteRoot).pathname]));
