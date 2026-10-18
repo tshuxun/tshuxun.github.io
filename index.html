@@ -356,6 +356,7 @@
       // Navigation, history, keyboard controls and transitions.
       function initNavigation() {
         const main = document.getElementById('main-content');
+        const homeLink = document.querySelector('.brand');
         const skipLink = document.querySelector('.skip-link');
         const primaryNav = document.querySelector('.primary-nav');
         const researchTabs = document.querySelector('.research-tabs');
@@ -369,13 +370,15 @@
         const researchPageId = panels[0].closest('.page').id;
         const defaultPanelId = tabs[0].getAttribute('aria-controls');
 
-        // Keep relative assets and the home link anchored to the original document.
+        // Keep relative URLs anchored before history changes the address bar.
         const base = document.createElement('base');
         base.href = location.href;
         document.head.prepend(base);
         const siteRoot = new URL('.', base.href);
         const isLocalFile = location.protocol === 'file:';
-        if (isLocalFile) document.querySelector('.brand').href = 'index.html';
+
+        // Local files need an explicit filename; hosted pages keep the directory link.
+        if (isLocalFile) homeLink.href = 'index.html';
 
         // Derive all public paths from the existing page and panel structure.
         const pathsById = new Map(pages.map((page) => [page.id, new URL(page.id, siteRoot).pathname]));
@@ -488,6 +491,7 @@
             idsByPath.get(normalizePath(location.pathname))) || defaultPageId;
           const target = document.getElementById(targetId);
           const pageId = target?.closest('.page')?.id || defaultPageId;
+          const page = document.getElementById(pageId);
           const panelId = target?.closest('.research-panel')?.id ||
             tabs.find((tab) => tab.id === targetId)?.getAttribute('aria-controls') || defaultPanelId;
           const previousPage = activePage;
@@ -510,7 +514,7 @@
           if (previousPage && previousPage !== pageId) {
             const nextIndex = pages.findIndex((page) => page.id === pageId);
             const oldIndex = pages.findIndex((page) => page.id === previousPage);
-            enterView(document.getElementById(pageId), nextIndex > oldIndex ? 1 : -1);
+            enterView(page, nextIndex > oldIndex ? 1 : -1);
           } else if (pageId === researchPageId && previousPanel && previousPanel !== panelId) {
             const nextIndex = panels.findIndex((panel) => panel.id === panelId);
             const oldIndex = panels.findIndex((panel) => panel.id === previousPanel);
@@ -521,7 +525,6 @@
           tabNavigation = null;
           cancelAnimationFrame(focusRequestId);
           focusRequestId = requestAnimationFrame(() => {
-            const page = document.getElementById(pageId);
             const isDeepLink = target && target !== page && page.contains(target) &&
               !panels.includes(target) && !tabs.includes(target);
             if (tabAction && previousPage === researchPageId) {
