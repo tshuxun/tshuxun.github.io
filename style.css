@@ -18,7 +18,7 @@
   --link-hover: var(--link);
 
   /* Text selection */
-  --selection-bg: #e6f3ec;
+  --selection-bg: #e5e5e5;
   --selection-text: #102a43;
 
   /* Typography */
@@ -69,7 +69,8 @@
 
 html {
   scroll-padding-top: 92px;
-  scrollbar-gutter: stable;
+  /* Keep view transitions from creating horizontal scrollbars. */
+  overflow-x: clip;
 }
 
 body {
@@ -178,9 +179,11 @@ h4, strong {
 
 /* Layout, header and navigation */
 
+/* Viewport-based content width prevents scrollbar-induced shifts.
+   The header itself keeps its natural width for the full-width divider. */
 .header-inner, .site-main, .site-footer {
-  width: min(calc(100% - 2 * var(--page-gutter)), var(--max-width));
-  margin-inline: auto;
+  width: min(calc(100vw - 2 * var(--page-gutter)), var(--max-width));
+  margin-inline: max(var(--page-gutter), calc((100vw - var(--max-width)) / 2)) 0;
 }
 
 .site-header {
@@ -246,28 +249,29 @@ h4, strong {
 
 .brand-name {
   display: block;
-  flex-shrink: 0;
   font: var(--weight-normal) 26px/1.2 var(--serif);
   letter-spacing: -.4px;
 }
 
-.primary-nav {
-  --nav-edge-gap: 10px;
+.primary-nav, .research-tabs {
   position: relative;
   isolation: isolate;
   display: flex;
+  align-items: stretch;
+}
+
+.primary-nav {
+  --nav-edge-gap: 10px;
   flex-shrink: 0;
   align-self: stretch;
-  align-items: stretch;
   gap: clamp(6px, 1.25vw, 18px);
 }
 
 .primary-nav a {
   padding-inline: clamp(10px, 1.05vw, 15px);
-  font-size: var(--nav-font-size);
 }
 
-/* Equal vertical padding for both navigation levels. */
+/* Shared navigation labels and active indicators. */
 
 .primary-nav a, .research-tabs a {
   position: relative;
@@ -278,6 +282,7 @@ h4, strong {
   justify-items: center;
   min-height: calc(var(--nav-item-height) + 2 * var(--nav-edge-gap));
   color: var(--heading);
+  font-size: var(--nav-font-size);
   font-weight: var(--nav-weight);
   line-height: 1.5;
 }
@@ -338,17 +343,13 @@ h4, strong {
   min-width: 0;
 }
 
-/* Space between paragraphs in a research description. */
-.research-prose p + p {
-  margin-top: 12px;
-}
-
-.about-bio, .paper-reference, .research-prose {
+/* Shared prose alignment; narrow screens override this below. */
+.about-bio, .research-goal, .research-summary-list, .paper-reference, .research-prose {
   text-align: justify;
   text-align-last: left;
 }
 
-.about-bio, .research-prose {
+.about-bio, .research-goal, .research-summary-list, .research-prose {
   hyphens: manual;
 }
 
@@ -365,6 +366,31 @@ h4, strong {
 .small-heading {
   font: var(--weight-semibold) 16px/1.5 var(--sans);
   letter-spacing: 0;
+}
+
+/* Shared lists and dated entries */
+
+.timeline, .project-list, .paper-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Align dates with the first text baseline. */
+.timeline li, .project-list li {
+  display: grid;
+  grid-template-columns: var(--entry-date-width) minmax(0, 1fr);
+  align-items: baseline;
+  column-gap: var(--entry-column-gap);
+}
+
+.entry-date {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: var(--weight-medium);
+  line-height: var(--entry-leading);
+  font-variant-numeric: lining-nums tabular-nums;
+  white-space: nowrap;
 }
 
 /* About Me */
@@ -439,36 +465,12 @@ h4, strong {
   color: var(--accent);
 }
 
-.timeline {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-/* Align dates with the first text baseline. */
-
-.timeline li, .project-list li {
-  display: grid;
-  grid-template-columns: var(--entry-date-width) minmax(0, 1fr);
-  align-items: baseline;
-  column-gap: var(--entry-column-gap);
-}
-
 .timeline li {
   margin-bottom: 15px;
 }
 
 .timeline li:last-child {
   margin-bottom: 0;
-}
-
-.entry-date {
-  color: var(--muted);
-  font-size: 16px;
-  font-weight: var(--weight-medium);
-  line-height: var(--entry-leading);
-  font-variant-numeric: lining-nums tabular-nums;
-  white-space: nowrap;
 }
 
 .timeline h4 {
@@ -529,22 +531,12 @@ h4, strong {
   font-size: .85em;
 }
 
-.research-goal, .research-summary-list {
-  text-align: justify;
-  text-align-last: left;
-  hyphens: manual;
-}
-
 /* Keep the publication-list heading and URL on the same line when space allows. */
 .publication-list-link .research-summary-title {
   display: inline;
 }
 
 .research-tabs {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: stretch;
   gap: 8px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
@@ -552,12 +544,13 @@ h4, strong {
 
 .research-tabs a {
   padding-inline: 17px;
-  font-size: var(--nav-font-size);
 }
 
 .research-panel {
   padding-top: 28px;
 }
+
+/* Highlights */
 
 .research-entry {
   display: grid;
@@ -624,7 +617,7 @@ h4, strong {
   letter-spacing: -.2px;
 }
 
-/* References */
+/* References and citation badges */
 
 .paper-reference {
   --reference-size: 16px;
@@ -678,8 +671,15 @@ h4, strong {
   display: none;
 }
 
+/* Highlight descriptions and selected works */
+
 .research-prose {
   margin-top: 16px;
+}
+
+/* Space between paragraphs in a research description. */
+.research-prose p + p {
+  margin-top: 12px;
 }
 
 .selected-works {
@@ -695,22 +695,12 @@ h4, strong {
   line-height: 1.5;
 }
 
-.paper-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .pending-reference {
   color: var(--muted);
   font-size: 14px;
 }
 
-.project-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+/* Projects */
 
 .project-list li {
   padding-block: 18px;
@@ -741,6 +731,8 @@ h4, strong {
 .project-role {
   color: var(--text);
 }
+
+/* Talks and teaching */
 
 .talk-list {
   margin: 0;
@@ -795,8 +787,6 @@ h4, strong {
   /* Optical alignment with the button label. */
   transform: translateY(1px);
 }
-
-/* Talks and teaching */
 
 .course-entry {
   padding: 2px 0 2px 17px;
@@ -859,7 +849,6 @@ h4, strong {
     grid-template-columns: minmax(190px, 27%) minmax(0, 1fr);
     gap: 30px;
   }
-
 }
 
 @media (max-width: 760px) {
@@ -896,7 +885,6 @@ h4, strong {
     grid-template-columns: 1fr;
     gap: 25px;
   }
-
 }
 
 @media (max-width: 600px) {
@@ -996,7 +984,6 @@ h4, strong {
   .project-list p {
     font-size: 14px;
   }
-
 }
 
 /* Left-align text on narrow screens to avoid stretched word spacing. */
@@ -1016,7 +1003,6 @@ h4, strong {
     grid-template-columns: 1fr;
     gap: 3px;
   }
-
 }
 
 /* Reduced motion and print */
@@ -1024,7 +1010,6 @@ h4, strong {
   .nav-selection {
     transition: none !important;
   }
-
 }
 
 @media print {
@@ -1039,6 +1024,7 @@ h4, strong {
 
   .site-main, .site-footer {
     width: 100%;
+    margin-inline: 0;
     padding-top: 0;
   }
 
@@ -1082,5 +1068,4 @@ h4, strong {
   .site-footer {
     margin-top: 24px;
   }
-
 }

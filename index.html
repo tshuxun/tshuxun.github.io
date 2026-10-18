@@ -10,7 +10,9 @@
 </head>
 <body>
   <!--
-    Content: duplicate complete entries below; use unique IDs for new sections.
+    Content: duplicate complete entries below; keep section and heading IDs unique.
+    Navigation: page IDs define /page paths; panel IDs define /page/panel paths.
+    Hosting: keep 404.html alongside index.html for direct visits to those paths.
     Styles: site defaults are in style.css :root; local adjustments stay with each component.
     Assets: use lowercase filenames with underscores in assets/.
     External links: noopener isolates the new tab; noreferrer omits the referring URL.
@@ -58,7 +60,7 @@
       <div class="about-intro">
         <div class="intro-main">
           <h1 id="about-title" tabindex="-1"><span class="latin-name">Shuxun Tian</span> <span class="chinese-name" lang="zh-CN">田树旬</span></h1>
-          <p class="about-bio">I am a lecturer and M.Sc. supervisor in the Department of Astronomy at Beijing Normal University. I earned my Ph.D. in theoretical physics from Wuhan University in 2020, then worked as a postdoctoral researcher at Beijing Normal University, and joined the faculty in 2024. My research focuses on developing theories of gravity and exploring their applications in cosmology and astrophysics. I proposed gravitational caloric theory and a microlensing method for testing gravity.</p>
+          <p class="about-bio">I am a lecturer and M.Sc. supervisor in the Department of Astronomy at Beijing Normal University. My research focuses on developing theories of gravity and exploring their applications in cosmology and astrophysics. Highlights of my work include gravitational caloric theory, black holes with conical infinity, and a microlensing method for testing gravity.</p>
         </div>
         <aside id="contact" class="contact-note" aria-labelledby="contact-title" tabindex="-1">
           <h2 id="contact-title" class="small-heading">Contact</h2>
@@ -168,7 +170,7 @@
         -->
         <article id="gravitational-caloric-theory" class="research-entry" aria-labelledby="gct-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/caloric_cosmological_phase_plane.png" width="1111" height="1108" alt="Cosmological phase plane" decoding="async">
+            <img src="assets/caloric_black_holes.png" width="1190" height="1043" alt="Caloric black holes" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
@@ -190,8 +192,7 @@
               <span data-citation-doi="10.48550/arXiv.2610.09606"></span>
             </p>
             <div class="research-prose">
-              <p>Gravitational caloric theory generalizes general relativity from the fluid side. Its initial motivation was to use the cosmic radiation-matter transition to trigger early dark energy and resolve the associated coincidence problem. Beyond this, the theory has a broad range of cosmological and astrophysical applications, including the early static hot Universe, conical black holes, and gravitational-wave physics.</p>
-              <p>The early static hot Universe and conical black holes may have particular astronomical relevance. The former faces theoretical challenges and will be discussed separately. <strong>Conical black holes</strong> in gravitational caloric theory can remain arbitrarily close to Schwarzschild in the strong-field (near-horizon) and weak-field (e.g., Solar System) regimes, yet approach conical geometry in the extremely weak-field regime. This highlights the importance of testing gravity theories in this regime.</p>
+              <p>Gravitational caloric theory generalizes general relativity from the fluid side. The theory has a broad range of cosmological and astrophysical applications, including early dark energy (initial motivation), the early static hot Universe, conical black holes, and gravitational-wave physics. Among these, the following two may have particular astronomical relevance. The early static hot Universe faces theoretical challenges and will be discussed separately. <strong>Conical black holes</strong> in this theory illustrate a distinctive way in which new physics may emerge: spacetime can remain in close agreement with general relativity in the strong-field (near-horizon) and conventional weak-field (e.g., Solar System) regimes, yet approach conical geometry in the extremely weak-field regime. This highlights the importance of testing gravity in such an extreme regime.</p>
             </div>
             <section class="selected-works" aria-labelledby="gct-selected-title">
               <h4 id="gct-selected-title">Selected follow-up works</h4>
@@ -218,7 +219,7 @@
               <span data-citation-doi="10.3847/2041-8213/ae954b"></span>
             </p>
             <div class="research-prose">
-              <p>Alternatives to general relativity may predict different properties of local gravitational systems. We explore how observations of individual sources with existing or near-future facilities can test these predictions, focusing on regimes that remain poorly constrained. Our current focus is the extremely weak-field regime, motivated in part by conical black holes in gravitational caloric theory. These solutions illustrate how close agreement with general relativity in stronger fields can coexist with significant deviations in extremely weak fields. We hope to identify observational probes that could reveal such new physics, although we have not yet found a sufficiently compelling one. Nevertheless, we have proposed a binary microlensing method for testing gravity as a step in this direction.</p>
+              <p>Alternatives to general relativity may predict different properties of local gravitational systems. We explore how observations of individual sources with existing or near-future facilities can test these predictions, focusing on regimes that remain poorly constrained. Our current focus is the extremely weak-field regime, motivated in part by conical black holes in gravitational caloric theory (significant deviations from general relativity may emerge only beyond Solar System scales). We hope to identify observational probes that could reveal such new physics. As a step in this direction, we have proposed a binary microlensing method for testing gravity, although it may not be a sufficiently compelling probe of the new physics we seek.</p>
             </div>
             <section class="selected-works" aria-labelledby="observations-selected-title">
               <h4 id="observations-selected-title">Selected related works</h4>
@@ -293,9 +294,7 @@
         <ul class="talk-list">
           <li class="talk-entry">
             <div class="talk-heading">
-              <h3 class="talk-title">
-                Test Presentation
-              </h3>
+              <h3 class="talk-title">Test Presentation</h3>
               <span data-slides="gravitational_caloric_theory.html"></span>
             </div>
             <p class="talk-details">
@@ -356,33 +355,86 @@
 
       // Navigation, history, keyboard controls and transitions.
       function initNavigation() {
-        const pages = Array.from(document.querySelectorAll('.page'));
-        const navLinks = document.querySelectorAll('.primary-nav a');
         const main = document.getElementById('main-content');
-        const tabs = Array.from(document.querySelectorAll('.research-tabs a'));
+        const skipLink = document.querySelector('.skip-link');
+        const primaryNav = document.querySelector('.primary-nav');
+        const researchTabs = document.querySelector('.research-tabs');
+        const pages = Array.from(document.querySelectorAll('.page'));
+        const navLinks = primaryNav.querySelectorAll('a');
+        const tabs = Array.from(researchTabs.querySelectorAll('a'));
         const panels = Array.from(document.querySelectorAll('.research-panel'));
+
         // Use the marked home page and the first research tab as defaults.
-        const defaultPageId = document.querySelector('.primary-nav [aria-current="page"]').dataset.page;
+        const defaultPageId = primaryNav.querySelector('[aria-current="page"]').dataset.page;
         const researchPageId = panels[0].closest('.page').id;
         const defaultPanelId = tabs[0].getAttribute('aria-controls');
-        const destinations = new Map();
-        let activePage = null;
-        let tabNavigation = null;
 
+        // Keep relative assets and the home link anchored to the original document.
+        const base = document.createElement('base');
+        base.href = location.href;
+        document.head.prepend(base);
+        const siteRoot = new URL('.', base.href);
+        const isLocalFile = location.protocol === 'file:';
+
+        // Derive all public paths from the existing page and panel structure.
+        const pathsById = new Map(pages.map((page) => [page.id, new URL(page.id, siteRoot).pathname]));
+        panels.forEach((panel) => {
+          pathsById.set(panel.id, new URL(panel.closest('.page').id + '/' + panel.id, siteRoot).pathname);
+        });
+        const idsByPath = new Map(Array.from(pathsById, ([id, path]) => [path, id]));
+
+        function routeHref(targetId) {
+          return isLocalFile ? '#' + targetId : pathsById.get(targetId);
+        }
+
+        function normalizePath(path) {
+          return path.replace(/\/+$/, '') || '/';
+        }
+
+        function restoreRoute() {
+          if (isLocalFile) return;
+          let url = new URL(location.href);
+          // The "route" parameter is shared with the GitHub Pages entry point, 404.html.
+          const requested = url.searchParams.get('route');
+          if (requested) {
+            url = new URL(siteRoot);
+            try {
+              const candidate = new URL(requested, siteRoot);
+              if (candidate.origin === siteRoot.origin && idsByPath.has(normalizePath(candidate.pathname))) url = candidate;
+            } catch { /* Invalid routes return to the homepage. */ }
+          }
+          const targetId = idsByPath.get(normalizePath(url.pathname));
+          if (targetId) {
+            url.pathname = pathsById.get(targetId);
+            url.hash = '';
+          }
+          if (url.href !== location.href) history.replaceState(null, '', url.href);
+        }
+
+        function navigate(targetId) {
+          // Update the URL without reloading or jumping to the anchor.
+          const url = new URL(routeHref(targetId), location.href);
+          if (location.href !== url.href) history.pushState(null, '', url.href);
+          showPage(true);
+        }
+
+        // View transitions and navigation indicators.
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const rootStyle = getComputedStyle(document.documentElement);
         const viewDurationMs = parseFloat(rootStyle.getPropertyValue('--view-motion-ms')) || 160;
         const viewDistancePx = parseFloat(rootStyle.getPropertyValue('--view-motion-distance')) || 14;
         const viewEasing = rootStyle.getPropertyValue('--motion-easing').trim() || 'cubic-bezier(.2, .7, .3, 1)';
+        let activePage = null;
         let activePanel = null;
-        let handledHash = null;
+        let tabNavigation = null;
+        let handledUrl = null;
         let viewAnimation = null;
         let focusRequestId = 0;
 
         // One moving background per navigation bar.
         const selections = [
-          [document.querySelector('.primary-nav'), '[aria-current="page"]'],
-          [document.querySelector('.research-tabs'), '[aria-selected="true"]']
+          [primaryNav, '[aria-current="page"]'],
+          [researchTabs, '[aria-selected="true"]']
         ].map(([nav, selector]) => {
           // Reserve the active label's width to prevent layout shifts.
           nav.querySelectorAll('a').forEach((link) => {
@@ -429,25 +481,12 @@
           }).catch(() => {}); // Cancelling an earlier transition is expected.
         }
 
-        function navigate(hash) {
-          // Update the URL without reloading or jumping to the anchor.
-          if (location.hash !== hash) history.pushState(null, '', hash);
-          showPage(true);
-        }
-
-        pages.forEach((page) => {
-          destinations.set(page.id, page.id);
-          page.querySelectorAll('[id]').forEach((element) => destinations.set(element.id, page.id));
-        });
-        document.querySelector('.research-tabs').setAttribute('role', 'tablist');
-        tabs.forEach((tab) => tab.setAttribute('role', 'tab'));
-        panels.forEach((panel) => panel.setAttribute('role', 'tabpanel'));
-
         function showPage(moveFocus = false) {
-          handledHash = location.hash;
-          const targetId = location.hash.slice(1) || defaultPageId;
-          const pageId = destinations.get(targetId) || defaultPageId;
+          handledUrl = location.href;
+          const targetId = (isLocalFile ? location.hash.slice(1) :
+            idsByPath.get(normalizePath(location.pathname))) || defaultPageId;
           const target = document.getElementById(targetId);
+          const pageId = target?.closest('.page')?.id || defaultPageId;
           const panelId = target?.closest('.research-panel')?.id ||
             tabs.find((tab) => tab.id === targetId)?.getAttribute('aria-controls') || defaultPanelId;
           const previousPage = activePage;
@@ -503,9 +542,23 @@
 
         function selectTab(tab) {
           tabNavigation = { tab, scrollY: window.scrollY };
-          navigate(tab.hash);
+          navigate(tab.getAttribute('aria-controls'));
         }
+
+        // Each navigation group uses its existing target IDs.
+        navLinks.forEach((link) => {
+          link.href = routeHref(link.dataset.page);
+          link.addEventListener('click', (event) => {
+            if (hasClickModifier(event)) return;
+            event.preventDefault();
+            navigate(link.dataset.page);
+          });
+        });
+        researchTabs.setAttribute('role', 'tablist');
+        panels.forEach((panel) => panel.setAttribute('role', 'tabpanel'));
         tabs.forEach((tab, index) => {
+          tab.setAttribute('role', 'tab');
+          tab.href = routeHref(tab.getAttribute('aria-controls'));
           tab.addEventListener('click', (event) => {
             if (hasClickModifier(event)) return;
             event.preventDefault();
@@ -523,25 +576,20 @@
             selectTab(tabs[next]);
           });
         });
+        skipLink.addEventListener('click', (event) => {
+          if (hasClickModifier(event)) return;
+          event.preventDefault();
+          main.focus({ preventScroll: true });
+          main.scrollIntoView({ block: 'start' });
+        });
+
         function restoreHistory() {
           // Handle popstate and hashchange only once per URL.
-          if (location.hash !== handledHash) showPage(true);
+          if (location.href !== handledUrl) showPage(true);
         }
         window.addEventListener('popstate', restoreHistory);
         window.addEventListener('hashchange', restoreHistory);
-        document.querySelectorAll('a[href^="#"]:not(.research-tabs a)').forEach((link) => {
-          link.addEventListener('click', (event) => {
-            if (hasClickModifier(event)) return;
-            if (link.hash === '#main-content') {
-              event.preventDefault();
-              main.focus({ preventScroll: true });
-              main.scrollIntoView({ block: 'start' });
-            } else {
-              event.preventDefault();
-              navigate(link.hash);
-            }
-          });
-        });
+        restoreRoute();
         showPage();
         window.addEventListener('resize', () => positionSelections());
         if (document.fonts?.ready) document.fonts.ready.then(() => positionSelections());
