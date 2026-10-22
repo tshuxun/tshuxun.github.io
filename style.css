@@ -554,7 +554,7 @@ h4, strong {
 
 .research-entry {
   display: grid;
-  grid-template-columns: minmax(220px, min(25%, 380px)) minmax(0, 1fr);
+  grid-template-columns: minmax(220px, min(25%, 400px)) minmax(0, 1fr);
   align-items: start;
   gap: clamp(28px, 4vw, 64px);
   min-width: 0;
