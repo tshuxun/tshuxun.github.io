@@ -127,17 +127,23 @@
     <section id="research" class="page" aria-labelledby="research-title">
       <header class="page-heading research-overview">
         <h1 id="research-title" tabindex="-1">Research</h1>
-        <!-- Add interests by duplicating a list item. -->
-        <section id="interests" class="research-summary-section" aria-labelledby="interests-title" tabindex="-1">
-          <h2 id="interests-title" class="research-summary-title">Interests:</h2>
-          <ul class="research-summary-list">
-            <li><strong>Gravity Theory:</strong> Fundamental Formulations, Applications to Cosmology and Astrophysics, Observational Tests</li>
-          </ul>
-        </section>
-        <section class="research-summary-section publication-list-link" aria-labelledby="publication-list-title">
-          <h2 id="publication-list-title" class="research-summary-title">Full Publication List:</h2>
-          <a href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw" target="_blank" rel="noopener noreferrer">https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw</a>
-        </section>
+        <div class="research-summary-columns">
+          <!-- Add interests by duplicating a list item. -->
+          <section id="interests" class="research-summary-section" aria-labelledby="interests-title" tabindex="-1">
+            <h2 id="interests-title" class="research-summary-title">Interests:</h2>
+            <ul class="research-summary-list">
+              <li><strong>Gravity Theory:</strong> Fundamental Formulations, Applications to Cosmology and Astrophysics, Observational Tests</li>
+              <li><strong>The Early Universe</strong></li>
+            </ul>
+          </section>
+          <section class="research-summary-section publication-list" aria-labelledby="publication-list-title">
+            <h2 id="publication-list-title" class="research-summary-title">Full Publication List:</h2>
+            <a class="publication-list-link" href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw" target="_blank" rel="noopener noreferrer" aria-label="Full publication list on ADS">
+              <img src="assets/ads_logo.svg" width="1447" height="1271" alt="ADS logo" decoding="async">
+              <span>ads</span>
+            </a>
+          </section>
+        </div>
         <p class="research-goal">My long-term goal is to uncover new physics in astronomy, with theory identifying where it may arise and observations confirming its existence.</p>
       </header>
 
@@ -204,7 +210,7 @@
 
         <article id="observational-tests" class="research-entry" aria-labelledby="observations-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/gravity_tests_potential_curvature.png" width="1852" height="1414" alt="Gravitational potential and curvature" loading="lazy" decoding="async">
+            <img src="assets/gravity_test_regimes.png" width="1852" height="1414" alt="Gravitational potential and curvature" loading="lazy" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
