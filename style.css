@@ -39,7 +39,7 @@
   /* Page dimensions and spacing */
   --max-width: 1680px;
   --page-gutter: clamp(28px, 5.8vw, 112px);
-  /* Shared right-column width and text inset for Contact and the publication link. */
+  /* Contact sidebar dimensions */
   --sidebar-width: 300px;
   --sidebar-text-inset: 28px;
   --main-padding-top: 30px;
@@ -347,7 +347,7 @@ h4, strong {
 }
 
 /* Shared prose alignment; narrow screens override this below. */
-.about-bio, .research-goal, .research-summary-list, .paper-reference, .research-prose {
+.about-bio, .research-goal, .paper-reference, .research-prose {
   text-align: justify;
   text-align-last: left;
 }
@@ -396,23 +396,12 @@ h4, strong {
   white-space: nowrap;
 }
 
-/* Shared sidebar layout */
-
-.about-intro, .research-summary-columns {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
-  /* Keep each column and its divider at its own content height. */
-  align-items: start;
-}
-
-.contact-note, .publication-list {
-  border-left: 2px solid var(--line);
-  padding-inline-start: calc(var(--sidebar-text-inset) - 2px);
-}
-
 /* About Me */
 
 .about-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+  align-items: start;
   gap: clamp(36px, 5vw, 80px);
 }
 
@@ -452,6 +441,8 @@ h4, strong {
 }
 
 .contact-note {
+  border-left: 2px solid var(--line);
+  padding-inline-start: calc(var(--sidebar-text-inset) - 2px);
   align-self: center;
   font-size: var(--detail-size);
   line-height: var(--body-leading);
@@ -518,10 +509,6 @@ h4, strong {
   margin-top: var(--overview-title-gap);
 }
 
-.research-summary-columns {
-  gap: var(--overview-block-gap) clamp(44px, calc(4vw + 12px), 76px);
-}
-
 .publication-list {
   display: flex;
   align-items: baseline;
@@ -558,6 +545,8 @@ h4, strong {
 
 .research-summary-list {
   display: grid;
+  text-align: left;
+  text-wrap: pretty;
   gap: var(--overview-item-gap);
   margin: var(--overview-heading-gap) 0 0;
   padding-left: 1.25em;
@@ -879,15 +868,6 @@ h4, strong {
     gap: 32px;
   }
 
-  .research-summary-columns {
-    grid-template-columns: 1fr;
-  }
-
-  .publication-list {
-    border-left: 0;
-    padding-inline-start: 0;
-  }
-
   .research-entry {
     grid-template-columns: minmax(190px, 27%) minmax(0, 1fr);
     gap: 30px;
@@ -1031,7 +1011,7 @@ h4, strong {
 
 /* Left-align text on narrow screens to avoid stretched word spacing. */
 @media screen and (max-width: 600px) {
-  .about-bio, .research-goal, .research-summary-list, .paper-reference, .research-prose {
+  .about-bio, .research-goal, .paper-reference, .research-prose {
     text-align: left;
   }
 }
