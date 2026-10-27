@@ -317,7 +317,7 @@ h4, strong {
 
 .nav-selection {
   position: absolute;
-  inset-block: 0;
+  top: 0;
   left: 0;
   z-index: 0;
   isolation: isolate;
@@ -382,8 +382,11 @@ h4, strong {
 /* Align dates with the first text baseline. */
 .timeline li, .project-list li {
   display: grid;
-  grid-template-columns: var(--entry-date-width) minmax(0, 1fr);
   align-items: baseline;
+}
+
+.timeline li {
+  grid-template-columns: var(--entry-date-width) minmax(0, 1fr);
   column-gap: var(--entry-column-gap);
 }
 
@@ -726,11 +729,27 @@ h4, strong {
   font-size: 14px;
 }
 
-/* Projects */
+/* Grants */
+
+.project-list {
+  display: grid;
+  grid-template-columns: max-content max-content minmax(0, 1fr);
+  column-gap: clamp(24px, 3vw, 40px);
+  width: fit-content;
+  max-width: 100%;
+}
 
 .project-list li {
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
   padding-block: 18px;
+  padding-inline: clamp(12px, 2vw, 16px);
   border-bottom: 1px solid var(--line);
+  color: var(--heading);
+}
+
+.project-list li[data-status="completed"] {
+  color: #74767c;
 }
 
 .project-list li:first-child {
@@ -742,20 +761,20 @@ h4, strong {
   padding-bottom: 0;
 }
 
-.project-list h3 {
+.project-list .entry-date, .project-role, .project-list h3 {
+  color: inherit;
+  font-weight: var(--weight-semibold);
+}
+
+.project-list h3, .project-role {
   font-size: var(--entry-title-size);
   line-height: 1.5;
 }
 
 .project-list p {
   margin-top: 4px;
-  color: var(--muted);
   font-size: var(--detail-size);
   line-height: var(--entry-leading);
-}
-
-.project-role {
-  color: var(--text);
 }
 
 /* Talks and teaching */
@@ -908,6 +927,19 @@ h4, strong {
     grid-template-columns: 1fr;
     gap: 25px;
   }
+
+  .project-list {
+    grid-template-columns: max-content minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .project-list li {
+    row-gap: 5px;
+  }
+
+  .project-list li > div {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 600px) {
@@ -999,8 +1031,6 @@ h4, strong {
   }
 
   .project-list li {
-    grid-template-columns: 1fr;
-    gap: 5px;
     padding-block: 16px;
   }
 

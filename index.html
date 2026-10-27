@@ -149,7 +149,7 @@
            Pair its id / aria-controls with the panel's aria-labelledby / id. -->
       <nav class="research-tabs" aria-label="Research sections">
         <a id="highlights-tab" href="#highlights" aria-controls="highlights">Highlights</a>
-        <a id="projects-tab" href="#projects" aria-controls="projects">Projects</a>
+        <a id="projects-tab" href="#projects" aria-controls="projects">Grants</a>
         <a id="talks-tab" href="#talks" aria-controls="talks">Talks</a>
       </nav>
 
@@ -256,35 +256,40 @@
       </section>
 
       <section id="projects" class="research-panel" aria-labelledby="projects-tab" tabindex="-1">
-        <h2 class="visually-hidden">Research Projects</h2>
-        <!-- Project entry: dates, title, funding source, role. -->
+        <h2 class="visually-hidden">Research Grants</h2>
+        <!-- Grants: duplicate a complete li; order newest first.
+             Include dates, role, title and funding source. Set data-status to ongoing or completed. -->
         <ol class="project-list">
-          <li>
-            <span class="entry-date">2025 – 2027</span>
-            <div>
-              <h3>Modeling and cosmological analysis of nonminimally coupled early dark energy</h3>
-              <p>National Natural Science Foundation of China (Young Scientists Fund, Type C) · <span class="project-role">Principal Investigator</span></p>
-            </div>
-          </li>
-          <li>
-            <span class="entry-date">2021 – 2024</span>
-            <div>
-              <h3>Theoretical models of early dark energy</h3>
-              <p>China Postdoctoral Science Foundation (General Program) · <span class="project-role">Principal Investigator</span></p>
-            </div>
-          </li>
-          <li>
-            <span class="entry-date">2020 – 2024</span>
-            <div>
-              <h3>Possible solutions to the cosmological coincidence problem and their implications</h3>
-              <p>China Postdoctoral Science Foundation (Innovative Program) · <span class="project-role">Principal Investigator</span></p>
-            </div>
-          </li>
-          <li>
+          <li data-status="ongoing">
             <span class="entry-date">2025 – 2029</span>
+            <span class="project-role">Participant</span>
             <div>
               <h3>High-frequency gravitational-wave astrophysics with a global observing network</h3>
-              <p>National Natural Science Foundation of China (Key Program) · <span class="project-role">Participant</span></p>
+              <p>National Natural Science Foundation of China (Key Program)</p>
+            </div>
+          </li>
+          <li data-status="ongoing">
+            <span class="entry-date">2025 – 2027</span>
+            <span class="project-role">Principal Investigator</span>
+            <div>
+              <h3>Modeling and cosmological analysis of nonminimally coupled early dark energy</h3>
+              <p>National Natural Science Foundation of China (Young Scientists Fund, Type C)</p>
+            </div>
+          </li>
+          <li data-status="completed">
+            <span class="entry-date">2021 – 2024</span>
+            <span class="project-role">Principal Investigator</span>
+            <div>
+              <h3>Theoretical models of early dark energy</h3>
+              <p>China Postdoctoral Science Foundation (General Program)</p>
+            </div>
+          </li>
+          <li data-status="completed">
+            <span class="entry-date">2020 – 2024</span>
+            <span class="project-role">Principal Investigator</span>
+            <div>
+              <h3>Possible solutions to the cosmological coincidence problem and their implications</h3>
+              <p>China Postdoctoral Science Foundation (Innovative Program)</p>
             </div>
           </li>
         </ol>
@@ -469,7 +474,8 @@
             const canMove = animate && !indicator.hidden && !reducedMotion.matches;
             indicator.style.transition = canMove ? '' : 'none';
             indicator.style.width = selected.offsetWidth + 'px';
-            indicator.style.transform = 'translateX(' + selected.offsetLeft + 'px)';
+            indicator.style.height = selected.offsetHeight + 'px';
+            indicator.style.transform = 'translate(' + selected.offsetLeft + 'px, ' + selected.offsetTop + 'px)';
             indicator.hidden = false;
             nav.classList.add('has-selection');
           });
