@@ -6,25 +6,18 @@
   <meta name="description" content="Shuxun Tian's academic homepage.">
   <meta name="theme-color" content="#ffffff">
   <title>Shuxun Tian | Beijing Normal University</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/publication_chart.js" defer></script>
 </head>
 <body>
-  <!--
-    Content: duplicate complete entries below; keep section and heading IDs unique.
-    Navigation: page IDs define /page paths; panel IDs define /page/panel paths.
-    Hosting: keep 404.html alongside index.html for direct visits to those paths.
-    Styles: site defaults are in style.css :root; local adjustments stay with each component.
-    Assets: use lowercase filenames with underscores in assets/.
-    External links: noopener isolates the new tab; noreferrer omits the referring URL.
-  -->
+  <!-- Page and panel IDs define public URLs. Keep 404.html beside this file for direct visits.
+       In assets/, name figures Fig_<topic> and slide decks SlidesYYYYMMDD_<topic>.
+       Match each asset's filename exactly, including its case and extension. -->
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
       <div class="brand-group">
-        <a class="brand" href="./" aria-label="Shuxun Tian, home">
-          <span class="brand-name">Shuxun Tian</span>
-        </a>
-        <!-- Decorative Solar System sketch. -->
+        <a class="brand" href="./" aria-label="Shuxun Tian, home">Shuxun Tian</a>
         <svg class="header-orbits" viewBox="0 0 220 64" fill="none" aria-hidden="true" focusable="false">
           <g transform="rotate(-8 110 32)">
             <g class="solar-orbits">
@@ -55,7 +48,6 @@
   </header>
 
   <main id="main-content" class="site-main" tabindex="-1">
-    <!-- About Me -->
     <section id="about" class="page" aria-labelledby="about-title">
       <div class="about-intro">
         <div class="intro-main">
@@ -68,14 +60,11 @@
           <p>Department of Astronomy<br>School of Physics and Astronomy<br>Beijing Normal University</p>
         </aside>
       </div>
-      <section id="background" class="background-section ruled-section" aria-labelledby="background-title" tabindex="-1">
-        <div class="section-heading">
-          <h2 id="background-title">Academic Background</h2>
-        </div>
+      <section id="background" class="ruled-section" aria-labelledby="background-title" tabindex="-1">
+        <h2 id="background-title">Academic Background</h2>
         <div class="background-columns">
           <section aria-labelledby="positions-title">
             <h3 id="positions-title" class="small-heading">Positions</h3>
-            <!-- Timeline entry: dates, institution, position or degree. -->
             <ol class="timeline">
               <li>
                 <span class="entry-date">2024 – Present</span>
@@ -123,11 +112,9 @@
       </section>
     </section>
 
-    <!-- Research -->
     <section id="research" class="page" aria-labelledby="research-title">
-      <header class="page-heading research-overview">
+      <header class="research-overview">
         <h1 id="research-title" tabindex="-1">Research</h1>
-        <!-- Add interests by duplicating a list item. -->
         <section id="interests" aria-labelledby="interests-title" tabindex="-1">
           <h2 id="interests-title" class="research-summary-title">Interests:</h2>
           <ul class="research-summary-list">
@@ -135,60 +122,41 @@
             <li><strong>The Early Universe:</strong> Quasi-Static Alternatives to Inflation, Quantum and Thermal Fluctuations</li>
           </ul>
         </section>
-        <section class="publication-list" aria-labelledby="publication-list-title">
-          <h2 id="publication-list-title" class="research-summary-title">Full Publication List:</h2>
-          <a class="publication-list-link" href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw" target="_blank" rel="noopener noreferrer" aria-label="Full publication list on ADS">
-            <img src="assets/ads_logo.svg" width="27" height="24" alt="ADS logo" decoding="async">
-            <span>ads</span>
-          </a>
-        </section>
         <p class="research-goal">My long-term goal is to uncover new physics in astronomy, with theory identifying where it may arise and observations confirming its existence.</p>
       </header>
 
-      <!-- Add each tab with a matching research-panel.
-           Pair its id / aria-controls with the panel's aria-labelledby / id. -->
+      <!-- For each tab, point aria-controls to the panel ID and the panel's aria-labelledby back to the tab ID. -->
       <nav class="research-tabs" aria-label="Research sections">
         <a id="highlights-tab" href="#highlights" aria-controls="highlights">Highlights</a>
+        <a id="publications-tab" href="#publications" aria-controls="publications">Publications</a>
         <a id="projects-tab" href="#projects" aria-controls="projects">Grants</a>
         <a id="talks-tab" href="#talks" aria-controls="talks">Talks</a>
       </nav>
 
       <section id="highlights" class="research-panel" aria-labelledby="highlights-tab" tabindex="-1">
         <h2 class="visually-hidden">Research Highlights</h2>
-        <!--
-          Highlights: duplicate a complete article.research-entry.
-          Assign unique article and heading IDs; update aria-labelledby.
-          Update the image source, pixel dimensions and short alt description.
-          Order: year/status and heading, core references, paragraphs, selected works.
-          Use selected-works for a paper-list or a pending-reference placeholder.
-        -->
-        <!--
-          References: use p.paper-reference.core-reference or li.paper-reference.
-          Order: authors, title, journal/status, arXiv, Citations.
-          Keep published author names; use strong for Tian and i for variables.
-          Use &nbsp; only to keep names or term-year pairs together.
-          Keep punctuation outside links; allow natural line wrapping.
-          Citations: <span data-citation-doi="DOI"></span> uses the shared template below.
-          Use the journal DOI after publication, otherwise the arXiv DOI; omit the badge if neither exists.
-          List related works from oldest to newest; put the main paper first among core references.
-        -->
+        <!-- Copy an article.research-entry per highlight. Give the article and heading unique IDs and link them with aria-labelledby.
+             Set the figure's intrinsic width, height and short alt text. List the main paper first.
+             Use p.paper-reference for core papers and li.paper-reference for selected works (oldest first).
+             Keep author names as published, bold Tian, italicize variables and put punctuation outside links.
+             For a badge, add <span data-citation-doi="DOI"></span> with the journal DOI or, for a preprint, the arXiv DOI. -->
         <article id="gravitational-caloric-theory" class="research-entry" aria-labelledby="gct-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/caloric_black_holes.png" width="1190" height="1043" alt="Caloric black holes" decoding="async">
+            <img src="assets/Fig_caloric_black_holes.png" width="1190" height="1043" alt="Caloric black holes" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
               <span class="highlight-label">2026</span>
               <h3 id="gct-title">Gravitational Caloric Theory</h3>
             </header>
-            <p class="paper-reference core-reference">
+            <p class="paper-reference">
               <strong>S.&nbsp;X.&nbsp;Tian</strong>,
               Gravitational caloric theory: From early dark energy to a wide variety of gravitational phenomena,
               <a href="https://link.aps.org/doi/10.1103/ckkf-2t3z" target="_blank" rel="noopener noreferrer">Phys. Rev. D 114, 044042 (2026)</a>.
               <a class="paper-preprint" href="https://arxiv.org/abs/2608.07318" target="_blank" rel="noopener noreferrer">arXiv:2608.07318</a>.
               <span data-citation-doi="10.1103/ckkf-2t3z"></span>
             </p>
-            <p class="paper-reference core-reference">
+            <p class="paper-reference">
               <strong>S.&nbsp;X.&nbsp;Tian</strong> and Z.-H.&nbsp;Zhu,
               Black holes with conical infinity in gravitational caloric theory,
               submitted to Phys. Rev. D (2026).
@@ -208,14 +176,14 @@
 
         <article id="observational-tests" class="research-entry" aria-labelledby="observations-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/gravity_test_regimes.png" width="1852" height="1414" alt="Gravitational potential and curvature" loading="lazy" decoding="async">
+            <img src="assets/Fig_gravity_test_regimes.png" width="1852" height="1414" alt="Gravitational potential and curvature" loading="lazy" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
               <span class="highlight-label">Ongoing</span>
               <h3 id="observations-title">Observational Tests of Gravity Theories</h3>
             </header>
-            <p class="paper-reference core-reference">
+            <p class="paper-reference">
               X.&nbsp;Jin, S.&nbsp;Cao, X.&nbsp;Chen, Y.&nbsp;Nan, X.&nbsp;Tai, and <strong>S.&nbsp;Tian</strong>,
               Testing general relativity with binary lens microlensing events,
               <a href="https://doi.org/10.3847/2041-8213/ae954b" target="_blank" rel="noopener noreferrer">Astrophys. J. Lett. 1008, L41 (2026)</a>.
@@ -255,10 +223,29 @@
         </article>
       </section>
 
+      <section id="publications" class="research-panel" aria-labelledby="publications-tab" tabindex="-1">
+        <p><strong>Full Publication List:</strong> <a href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw" target="_blank" rel="noopener noreferrer">https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw</a></p>
+        <figure class="publication-chart">
+          <figcaption>
+            <h2>Publications by Year</h2>
+          </figcaption>
+          <!-- Append one column per journal publication year. Count each paper once.
+               For non-first-author papers, use "corresponding" if Tian's email is listed and "other" otherwise. -->
+          <script type="application/json">
+            {
+              "years":         [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026],
+              "first":         [   2,    1,    3,    3,    2,    1,    2,    0,    0,    1],
+              "corresponding": [   0,    0,    0,    0,    0,    0,    0,    1,    0,    3],
+              "other":         [   0,    0,    0,    1,    0,    1,    0,    1,    1,    0]
+            }
+          </script>
+          <p class="publication-note">Papers are counted by year of journal publication.</p>
+        </figure>
+      </section>
+
       <section id="projects" class="research-panel" aria-labelledby="projects-tab" tabindex="-1">
         <h2 class="visually-hidden">Research Grants</h2>
-        <!-- Grants: duplicate a complete li; order newest first.
-             Include dates, role, title and funding source. Set data-status to ongoing or completed. -->
+        <!-- List grants newest first; use data-status="ongoing" or "completed". -->
         <ol class="project-list">
           <li data-status="ongoing">
             <span class="entry-date">2025 – 2029</span>
@@ -294,38 +281,32 @@
           </li>
         </ol>
       </section>
+
       <section id="talks" class="research-panel" aria-labelledby="talks-tab" tabindex="-1">
         <h2 class="visually-hidden">Talks</h2>
-        <!-- Talks: duplicate li.talk-entry; list newest first.
-             Update the title, date, city and event.
-             Downloads: <span data-slides="filename.ext"></span> uses a file in assets/; omit the span or leave the filename empty for no button.
-             Dates use Month D, YYYY. The entry below is an example. -->
+        <!-- List talks newest first (Month D, YYYY). For an attachment, add a span with data-slides set to its filename in assets/. -->
         <ul class="talk-list">
           <li class="talk-entry">
             <div class="talk-heading">
-              <h3 class="talk-title">Test Presentation</h3>
-              <span data-slides="gravitational_caloric_theory.html"></span>
+              <h3>Black holes with conical infinity in gravitational caloric theory</h3>
+              <span data-slides="Slides20261031_Black_holes_with_conical_infinity_in_GCT.html"></span>
             </div>
             <p class="talk-details">
-              <span class="talk-date">October 1, 2026</span> ·
-              <span class="talk-city">Beijing</span> ·
-              <span class="talk-event">Group meeting at BNU</span>
+              <span>October 31, 2026</span> ·
+              <span>Hangzhou, China</span> ·
+              <span>2026 Hangzhou Workshop on Gravity and Cosmology</span>
             </p>
           </li>
         </ul>
       </section>
     </section>
 
-    <!-- Teaching -->
     <section id="teaching" class="page" aria-labelledby="teaching-title">
-      <header class="page-heading">
+      <header>
         <h1 id="teaching-title" tabindex="-1">Teaching</h1>
       </header>
-      <section class="course-section ruled-section" aria-labelledby="courses-title">
-        <div class="section-heading">
-          <h2 id="courses-title">Courses</h2>
-        </div>
-        <!-- Course entry: title and terms, followed by materials. -->
+      <section class="ruled-section" aria-labelledby="courses-title">
+        <h2 id="courses-title">Courses</h2>
         <article class="course-entry">
           <h3>Galactic Dynamics (Graduate): <span class="course-terms">Fall&nbsp;2024, Fall&nbsp;2025, Fall&nbsp;2026</span></h3>
           <p class="course-materials">Teaching materials: forthcoming.</p>
@@ -337,7 +318,6 @@
     <span>Last updated: <time id="last-updated"></time></span>
   </footer>
 
-  <!-- Shared download button; entries supply a filename in data-slides. -->
   <template id="slides-download-template">
     <a class="slides-download" download>
       <svg class="slides-download-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
@@ -347,8 +327,7 @@
     </a>
   </template>
 
-  <!-- Shared Dimensions badge; references supply data-citation-doi.
-       The fallback link remains until the badge loads. -->
+  <!-- The link remains available until Dimensions installs the badge. -->
   <template id="citation-badge-template">
     <span class="citation-badge __dimensions_badge_embed__" data-style="small_rectangle" data-hide-zero-citations="false"><a class="citation-fallback" target="_blank" rel="noopener noreferrer" title="View citation details on Dimensions">Citations</a></span>
   </template>
@@ -362,7 +341,6 @@
       updateLastModified();
       initCitationBadges();
 
-      // Navigation, history, keyboard controls and transitions.
       function initNavigation() {
         const main = document.getElementById('main-content');
         const homeLink = document.querySelector('.brand');
@@ -374,10 +352,9 @@
         const tabs = Array.from(researchTabs.querySelectorAll('a'));
         const panels = Array.from(document.querySelectorAll('.research-panel'));
 
-        // Use the marked home page and the first research tab as defaults.
-        const defaultPageId = primaryNav.querySelector('[aria-current="page"]').dataset.page;
-        const researchPageId = panels[0].closest('.page').id;
-        const defaultPanelId = tabs[0].getAttribute('aria-controls');
+        const defaultPage = document.getElementById(primaryNav.querySelector('[aria-current="page"]').dataset.page);
+        const researchPage = researchTabs.closest('.page');
+        const defaultPanel = document.getElementById(tabs[0].getAttribute('aria-controls'));
 
         // Keep relative URLs anchored before history changes the address bar.
         const base = document.createElement('base');
@@ -389,7 +366,6 @@
         // Local files need an explicit filename; hosted pages keep the directory link.
         if (isLocalFile) homeLink.href = 'index.html';
 
-        // Derive all public paths from the existing page and panel structure.
         const pathsById = new Map(pages.map((page) => [page.id, new URL(page.id, siteRoot).pathname]));
         panels.forEach((panel) => {
           pathsById.set(panel.id, new URL(panel.closest('.page').id + '/' + panel.id, siteRoot).pathname);
@@ -425,13 +401,11 @@
         }
 
         function navigate(targetId) {
-          // Update the URL without reloading or jumping to the anchor.
           const url = new URL(routeHref(targetId), location.href);
           if (location.href !== url.href) history.pushState(null, '', url.href);
           showPage(true);
         }
 
-        // View transitions and navigation indicators.
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const rootStyle = getComputedStyle(document.documentElement);
         const viewDurationMs = parseFloat(rootStyle.getPropertyValue('--view-motion-ms')) || 160;
@@ -481,10 +455,11 @@
           });
         }
 
-        function enterView(element, direction) {
+        function enterView(element, previous, order) {
           viewAnimation?.cancel();
           viewAnimation = null;
           if (reducedMotion.matches || !element.animate) return;
+          const direction = order.indexOf(element) > order.indexOf(previous) ? 1 : -1;
           const animation = element.animate([
             { opacity: .25, transform: 'translateX(' + direction * viewDistancePx + 'px)' },
             { opacity: 1, transform: 'translateX(0)' }
@@ -498,37 +473,32 @@
         function showPage(moveFocus = false) {
           handledUrl = location.href;
           const targetId = (isLocalFile ? location.hash.slice(1) :
-            idsByPath.get(normalizePath(location.pathname))) || defaultPageId;
+            idsByPath.get(normalizePath(location.pathname))) || defaultPage.id;
           const target = document.getElementById(targetId);
-          const pageId = target?.closest('.page')?.id || defaultPageId;
-          const page = document.getElementById(pageId);
-          const panelId = target?.closest('.research-panel')?.id ||
-            tabs.find((tab) => tab.id === targetId)?.getAttribute('aria-controls') || defaultPanelId;
+          const page = target?.closest('.page') || defaultPage;
+          const panelTarget = tabs.includes(target) ? document.getElementById(target.getAttribute('aria-controls')) : target;
+          const panel = panelTarget?.closest('.research-panel') || defaultPanel;
           const previousPage = activePage;
           const previousPanel = activePanel;
-          activePage = pageId;
-          activePanel = panelId;
-          pages.forEach((page) => { page.hidden = page.id !== pageId; });
-          panels.forEach((panel) => { panel.hidden = panel.id !== panelId; });
+          activePage = page;
+          activePanel = panel;
+          pages.forEach((item) => { item.hidden = item !== page; });
+          panels.forEach((item) => { item.hidden = item !== panel; });
           tabs.forEach((tab) => {
-            const selected = tab.getAttribute('aria-controls') === panelId;
+            const selected = tab.getAttribute('aria-controls') === panel.id;
             tab.setAttribute('aria-selected', String(selected));
             tab.tabIndex = selected ? 0 : -1;
           });
           navLinks.forEach((link) => {
-            if (link.dataset.page === pageId) link.setAttribute('aria-current', 'page');
+            if (link.dataset.page === page.id) link.setAttribute('aria-current', 'page');
             else link.removeAttribute('aria-current');
           });
           positionSelections(Boolean(previousPage));
 
-          if (previousPage && previousPage !== pageId) {
-            const nextIndex = pages.findIndex((page) => page.id === pageId);
-            const oldIndex = pages.findIndex((page) => page.id === previousPage);
-            enterView(page, nextIndex > oldIndex ? 1 : -1);
-          } else if (pageId === researchPageId && previousPanel && previousPanel !== panelId) {
-            const nextIndex = panels.findIndex((panel) => panel.id === panelId);
-            const oldIndex = panels.findIndex((panel) => panel.id === previousPanel);
-            enterView(document.getElementById(panelId), nextIndex > oldIndex ? 1 : -1);
+          if (previousPage && previousPage !== page) {
+            enterView(page, previousPage, pages);
+          } else if (page === researchPage && previousPanel && previousPanel !== panel) {
+            enterView(panel, previousPanel, panels);
           }
 
           const tabAction = tabNavigation;
@@ -537,7 +507,7 @@
           focusRequestId = requestAnimationFrame(() => {
             const isDeepLink = target && target !== page && page.contains(target) &&
               !panels.includes(target) && !tabs.includes(target);
-            if (tabAction && previousPage === researchPageId) {
+            if (tabAction && previousPage === researchPage) {
               window.scrollTo({ top: tabAction.scrollY, behavior: 'instant' });
               tabAction.tab.focus({ preventScroll: true });
             } else if (isDeepLink) {
@@ -550,8 +520,12 @@
           });
         }
 
-        function hasClickModifier(event) {
-          return event.ctrlKey || event.metaKey || event.shiftKey || event.altKey;
+        function onUnmodifiedClick(link, action) {
+          link.addEventListener('click', (event) => {
+            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            action();
+          });
         }
 
         function selectTab(tab) {
@@ -559,25 +533,16 @@
           navigate(tab.getAttribute('aria-controls'));
         }
 
-        // Each navigation group uses its existing target IDs.
         navLinks.forEach((link) => {
           link.href = routeHref(link.dataset.page);
-          link.addEventListener('click', (event) => {
-            if (hasClickModifier(event)) return;
-            event.preventDefault();
-            navigate(link.dataset.page);
-          });
+          onUnmodifiedClick(link, () => navigate(link.dataset.page));
         });
         researchTabs.setAttribute('role', 'tablist');
         panels.forEach((panel) => panel.setAttribute('role', 'tabpanel'));
         tabs.forEach((tab, index) => {
           tab.setAttribute('role', 'tab');
           tab.href = routeHref(tab.getAttribute('aria-controls'));
-          tab.addEventListener('click', (event) => {
-            if (hasClickModifier(event)) return;
-            event.preventDefault();
-            selectTab(tab);
-          });
+          onUnmodifiedClick(tab, () => selectTab(tab));
           tab.addEventListener('keydown', (event) => {
             let next;
             if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -590,9 +555,7 @@
             selectTab(tabs[next]);
           });
         });
-        skipLink.addEventListener('click', (event) => {
-          if (hasClickModifier(event)) return;
-          event.preventDefault();
+        onUnmodifiedClick(skipLink, () => {
           main.focus({ preventScroll: true });
           main.scrollIntoView({ block: 'start' });
         });
@@ -613,7 +576,6 @@
         });
       }
 
-      // Fill the shared download template with a filename from assets/.
       function initTalkDownloads() {
         const downloadTemplate = document.getElementById('slides-download-template').content.firstElementChild;
         document.querySelectorAll('[data-slides]').forEach((placeholder) => {
@@ -629,10 +591,8 @@
         });
       }
 
-      // Format index.html's modification time for the footer.
       function updateLastModified() {
-        // Uses local file metadata or the server's Last-Modified header.
-        // Without modification metadata, the browser may report the current time.
+        // The browser uses file or server metadata and may fall back to the current time.
         const updatedAt = document.getElementById('last-updated');
         const modifiedAt = new Date(document.lastModified);
         if (!Number.isNaN(modifiedAt.getTime())) {
@@ -643,7 +603,6 @@
         }
       }
 
-      // Fill the shared template, then load Dimensions once.
       function initCitationBadges() {
         const placeholders = document.querySelectorAll('[data-citation-doi]');
         if (!placeholders.length) return;

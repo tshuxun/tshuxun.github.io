@@ -1,8 +1,3 @@
-/*
- * Site defaults are in :root; component adjustments stay with their selectors.
- * Responsive, reduced-motion and print rules follow the main styles.
- */
-
 :root {
   color-scheme: light;
   /* Colors */
@@ -13,9 +8,7 @@
   --line: #dde2e8;
   --accent: #971b3c;
   --accent-soft: #f6edf0;
-  /* Content links, including hover states. */
   --link: #1d4ed8;
-  --link-hover: var(--link);
 
   /* Text selection */
   --selection-bg: #e5e5e5;
@@ -26,7 +19,7 @@
   --serif: Georgia, "Times New Roman", "Songti SC", SimSun, serif;
   --body-size: 17px;
   --body-leading: 1.6;
-  /* Compact entries follow the body line height. */
+  --prose-align: justify;
   --entry-leading: calc(var(--body-leading) - .05);
   --page-title-size: clamp(30px, 2.9vw, 40px);
   --section-title-size: 27px;
@@ -39,16 +32,13 @@
   /* Page dimensions and spacing */
   --max-width: 1680px;
   --page-gutter: clamp(28px, 5.8vw, 112px);
-  /* Contact sidebar dimensions */
-  --sidebar-width: 300px;
-  --sidebar-text-inset: 28px;
   --main-padding-top: 30px;
   --main-padding-bottom: 36px;
   --intro-gap: 17px;
   --section-gap: 29px;
   --section-inset: 23px;
-  --entry-date-width: 130px;
-  --entry-column-gap: 20px;
+  --timeline-date-width: 130px;
+  --timeline-column-gap: 20px;
 
   /* Shared navigation appearance and motion */
   --nav-active-bg: #f1e9ee;
@@ -106,8 +96,7 @@ a {
 }
 
 a:hover, a:active {
-  color: var(--link-hover);
-  text-decoration: none;
+  color: var(--link);
 }
 
 a[href^="#"] {
@@ -151,7 +140,7 @@ h3 {
   line-height: 1.45;
 }
 
-h4, strong {
+strong {
   font-weight: var(--weight-semibold);
 }
 
@@ -244,16 +233,12 @@ h4, strong {
   display: block;
   flex-shrink: 0;
   color: var(--heading);
+  font: var(--weight-normal) 26px/1.2 var(--serif);
+  letter-spacing: -.4px;
 }
 
 .brand:hover {
   color: var(--heading);
-}
-
-.brand-name {
-  display: block;
-  font: var(--weight-normal) 26px/1.2 var(--serif);
-  letter-spacing: -.4px;
 }
 
 .primary-nav, .research-tabs {
@@ -274,15 +259,12 @@ h4, strong {
   padding-inline: clamp(10px, 1.05vw, 15px);
 }
 
-/* Shared navigation labels and active indicators. */
-
 .primary-nav a, .research-tabs a {
   position: relative;
   z-index: 1;
   isolation: isolate;
   display: grid;
-  align-items: center;
-  justify-items: center;
+  place-items: center;
   min-height: calc(var(--nav-item-height) + 2 * var(--nav-edge-gap));
   color: var(--heading);
   font-size: var(--nav-font-size);
@@ -346,9 +328,8 @@ h4, strong {
   min-width: 0;
 }
 
-/* Shared prose alignment; narrow screens override this below. */
 .about-bio, .research-goal, .paper-reference, .research-prose {
-  text-align: justify;
+  text-align: var(--prose-align);
   text-align-last: left;
 }
 
@@ -362,7 +343,7 @@ h4, strong {
   border-top: 1px solid var(--line);
 }
 
-.section-heading {
+.ruled-section > h2 {
   margin-bottom: 18px;
 }
 
@@ -373,28 +354,28 @@ h4, strong {
 
 /* Shared lists and dated entries */
 
-.timeline, .project-list, .paper-list {
+.timeline, .project-list, .paper-list, .publication-legend {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-/* Align dates with the first text baseline. */
+.research-summary-list > li::marker, .talk-entry::marker {
+  color: var(--muted);
+  font-size: .85em;
+}
+
 .timeline li, .project-list li {
   display: grid;
   align-items: baseline;
 }
 
 .timeline li {
-  grid-template-columns: var(--entry-date-width) minmax(0, 1fr);
-  column-gap: var(--entry-column-gap);
+  grid-template-columns: var(--timeline-date-width) minmax(0, 1fr);
+  column-gap: var(--timeline-column-gap);
 }
 
 .entry-date {
-  color: var(--muted);
-  font-size: 16px;
-  font-weight: var(--weight-medium);
-  line-height: var(--entry-leading);
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
 }
@@ -402,8 +383,10 @@ h4, strong {
 /* About Me */
 
 .about-intro {
+  --contact-width: 300px;
+  --contact-text-inset: 28px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) var(--sidebar-width);
+  grid-template-columns: minmax(0, 1fr) var(--contact-width);
   align-items: start;
   gap: clamp(36px, 5vw, 80px);
 }
@@ -425,18 +408,15 @@ h4, strong {
 }
 
 /* Optical alignment of the Chinese name with the Latin name. */
-
 .chinese-name {
-  --name-cjk-size: .82em;
-  --name-cjk-offset: -.1em;
   display: inline-block;
   color: var(--heading);
   font: inherit;
   font-family: var(--sans);
-  font-size: var(--name-cjk-size);
+  font-size: .82em;
   line-height: 1;
   letter-spacing: 0;
-  transform: translateY(var(--name-cjk-offset));
+  transform: translateY(-.1em);
 }
 
 .about-bio {
@@ -445,7 +425,7 @@ h4, strong {
 
 .contact-note {
   border-left: 2px solid var(--line);
-  padding-inline-start: calc(var(--sidebar-text-inset) - 2px);
+  padding-inline-start: calc(var(--contact-text-inset) - 2px);
   align-self: center;
   font-size: var(--detail-size);
   line-height: var(--body-leading);
@@ -471,17 +451,18 @@ h4, strong {
   color: var(--accent);
 }
 
-.timeline li {
+.timeline li:not(:last-child) {
   margin-bottom: 15px;
 }
 
-.timeline li:last-child {
-  margin-bottom: 0;
-}
-
-.timeline h4 {
+.timeline h4, .timeline .entry-date {
   font-size: 16px;
   line-height: var(--entry-leading);
+}
+
+.timeline .entry-date {
+  color: var(--muted);
+  font-weight: var(--weight-medium);
 }
 
 .timeline p {
@@ -494,7 +475,6 @@ h4, strong {
 /* Research overview and panels */
 
 .research-overview {
-  /* Separate title spacing from the shared spacing between blocks. */
   --overview-title-gap: 14px;
   --overview-block-gap: 12px;
   --overview-heading-gap: 2px;
@@ -510,32 +490,6 @@ h4, strong {
 
 .research-overview > h1 + * {
   margin-top: var(--overview-title-gap);
-}
-
-.publication-list {
-  display: flex;
-  align-items: baseline;
-  gap: 7px;
-}
-
-.publication-list-link {
-  flex: none;
-  white-space: nowrap;
-}
-
-.publication-list-link img {
-  width: auto;
-  height: 1.4em;
-  vertical-align: -.3em;
-}
-
-.publication-list-link span {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: var(--weight-normal);
-  /* Thicken the wordmark without changing its width or baseline. */
-  -webkit-text-stroke: .2px currentColor;
-  line-height: 1;
-  letter-spacing: .04em;
 }
 
 .research-summary-title {
@@ -560,13 +514,9 @@ h4, strong {
   padding-left: .15em;
 }
 
-.research-summary-list > li::marker {
-  color: var(--muted);
-  font-size: .85em;
-}
-
 .research-tabs {
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 0 8px;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
@@ -595,7 +545,7 @@ h4, strong {
   border-top: 1px solid var(--line);
 }
 
-.highlight-figure {
+.highlight-figure, .highlight-content {
   min-width: 0;
 }
 
@@ -605,17 +555,11 @@ h4, strong {
   height: auto;
 }
 
-.highlight-content {
-  min-width: 0;
-}
-
-/* Shared title and year/status label dimensions. */
 .highlight-heading {
   --highlight-title-size: clamp(23px, 1.85vw, 28px);
   --highlight-title-leading: 1.28;
   --highlight-label-size: 16px;
   --highlight-label-height: 1.875em;
-  --highlight-label-offset: 0px;
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
   align-items: start;
@@ -624,13 +568,12 @@ h4, strong {
 }
 
 /* Center the label against the title's first line. */
-
 .highlight-label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: var(--highlight-label-height);
-  margin-top: calc((var(--highlight-title-size) * var(--highlight-title-leading) - var(--highlight-label-height)) / 2 + var(--highlight-label-offset));
+  margin-top: calc((var(--highlight-title-size) * var(--highlight-title-leading) - var(--highlight-label-height)) / 2);
   padding-inline: .7em;
   border-radius: 999px;
   background: var(--accent-soft);
@@ -649,21 +592,12 @@ h4, strong {
 /* References and citation badges */
 
 .paper-reference {
-  --reference-size: 16px;
-  --reference-leading: var(--entry-leading);
-  --reference-author-weight: var(--weight-semibold);
-  --reference-gap: 9px;
-  font-size: var(--reference-size);
-  line-height: var(--reference-leading);
+  font-size: 16px;
+  line-height: var(--entry-leading);
 }
 
-/* Shared spacing for core references and paper lists. */
 .paper-reference + .paper-reference {
-  margin-top: var(--reference-gap);
-}
-
-.paper-reference strong {
-  font-weight: var(--reference-author-weight);
+  margin-top: 9px;
 }
 
 .paper-reference a {
@@ -676,10 +610,9 @@ h4, strong {
 
 /* Override Dimensions' inline display and alignment. */
 .citation-badge {
-  --citation-offset: -2.5px;
   display: inline-block !important;
   position: relative;
-  top: var(--citation-offset);
+  top: -2.5px;
   text-align: left;
   text-align-last: auto;
   vertical-align: middle !important;
@@ -706,7 +639,6 @@ h4, strong {
   margin-top: 16px;
 }
 
-/* Space between paragraphs in a research description. */
 .research-prose p + p {
   margin-top: 12px;
 }
@@ -729,6 +661,141 @@ h4, strong {
   font-size: 14px;
 }
 
+/* Annual publications */
+
+#publications { container-type: inline-size; }
+
+.publication-chart h2 {
+  font-size: 1.25em;
+}
+
+.publication-chart {
+  --axis-width: 28px;
+  --year-font-size: clamp(12px, 1.1vw, 14px);
+  /* The unused width in each year's slot separates adjacent bars. */
+  --year-slot: clamp(
+    calc(2.5 * var(--year-font-size)),
+    calc((100cqi - var(--axis-width)) / var(--chart-years)),
+    62px
+  );
+  --bar-width: max(calc(2.25 * var(--year-font-size)), calc(.62 * var(--year-slot)));
+  --chart-width: calc(var(--axis-width) + var(--chart-years) * var(--year-slot));
+  position: relative;
+  width: var(--chart-width);
+  max-width: 100%;
+  margin-top: 14px;
+}
+
+.publication-chart [data-series="first"] { --series-color: #f47765; }
+.publication-chart [data-series="corresponding"] { --series-color: #49a8df; }
+.publication-chart [data-series="other"] { --series-color: #c6d1d8; }
+
+.publication-legend {
+  --swatch-size: .7em;
+  display: grid;
+  grid-template-columns: var(--swatch-size) repeat(2, max-content) minmax(0, auto);
+  justify-content: start;
+  gap: 2px .25em;
+  line-height: 1.45;
+}
+
+.publication-chart > .publication-legend {
+  margin-top: 6px;
+  row-gap: 3px;
+  font-size: calc(var(--detail-size) + 1px);
+}
+
+.publication-legend li {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  align-items: baseline;
+}
+
+.publication-legend li::before {
+  content: "";
+  align-self: start;
+  height: var(--swatch-size);
+  /* Center the swatch on the first line, including when a label wraps. */
+  margin-block-start: calc((1lh - var(--swatch-size)) / 2);
+  border-radius: 2px;
+  background: var(--series-color);
+}
+
+.publication-count {
+  /* Keep the extra space after the swatch outside the two equal gaps around ×. */
+  padding-inline-start: .2em;
+  color: var(--heading);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.publication-chart-scroll {
+  margin-block: 12px;
+  overflow-x: auto;
+}
+.publication-column:focus:not(:focus-visible) { outline: none; }
+.publication-chart-scroll:focus-visible, .publication-column:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: -2px;
+}
+
+.publication-plot {
+  display: grid;
+  grid-template-columns: var(--axis-width) minmax(0, 1fr);
+  min-width: var(--chart-width);
+}
+
+.publication-plot svg { display: block; min-width: 0; }
+.publication-gridline { stroke: #e0e8ed; }
+.publication-zero { stroke: #8ca2b0; stroke-width: 1.4; }
+
+.publication-bar {
+  width: var(--bar-width);
+  transform-box: fill-box;
+  transform: translateX(-50%);
+  fill: var(--series-color);
+}
+
+.publication-plot text {
+  fill: #627382;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.publication-plot .publication-year {
+  fill: #263e4b;
+  font-size: var(--year-font-size);
+  font-weight: var(--weight-semibold);
+}
+
+.publication-tooltip {
+  position: absolute;
+  z-index: 2;
+  width: max-content;
+  max-width: 100%;
+  padding: 8px 11px;
+  border: 1px solid #d8e4eb;
+  border-radius: var(--nav-radius);
+  background: var(--paper);
+  box-shadow: 0 3px 12px rgb(44 77 96 / 12%);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.publication-tooltip strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--heading);
+  font-size: 15px;
+}
+
+.publication-note {
+  color: var(--muted);
+  font-size: var(--detail-size);
+}
+
 /* Grants */
 
 .project-list {
@@ -743,7 +810,7 @@ h4, strong {
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
   padding-block: 18px;
-  padding-inline: clamp(12px, 2vw, 16px);
+  padding-inline: clamp(8px, 1.5vw, 12px);
   border-bottom: 1px solid var(--line);
   color: var(--heading);
 }
@@ -761,14 +828,18 @@ h4, strong {
   padding-bottom: 0;
 }
 
-.project-list .entry-date, .project-role, .project-list h3 {
+.project-list .entry-date, .project-list .project-role, .project-list h3 {
   color: inherit;
   font-weight: var(--weight-semibold);
+  line-height: 1.5;
 }
 
-.project-list h3, .project-role {
+.project-list .entry-date, .project-list .project-role {
+  font-size: calc(var(--entry-title-size) - .5px);
+}
+
+.project-list h3 {
   font-size: var(--entry-title-size);
-  line-height: 1.5;
 }
 
 .project-list p {
@@ -787,11 +858,6 @@ h4, strong {
 
 .talk-entry {
   padding-block: 2px;
-}
-
-.talk-entry::marker {
-  color: var(--muted);
-  font-size: .85em;
 }
 
 .talk-heading {
@@ -873,13 +939,13 @@ h4, strong {
 @media (max-width: 1000px) {
   :root {
     --page-gutter: 32px;
-    --sidebar-width: 250px;
-    --sidebar-text-inset: 24px;
-    --entry-date-width: 120px;
-    --entry-column-gap: 12px;
+    --timeline-date-width: 120px;
+    --timeline-column-gap: 12px;
   }
 
   .about-intro {
+    --contact-width: 250px;
+    --contact-text-inset: 24px;
     gap: 32px;
   }
 
@@ -896,8 +962,8 @@ h4, strong {
 @media (max-width: 760px) {
   :root {
     --page-gutter: 24px;
-    --entry-date-width: 130px;
-    --entry-column-gap: 20px;
+    --timeline-date-width: 130px;
+    --timeline-column-gap: 20px;
     --main-padding-top: 26px;
     --main-padding-bottom: 34px;
   }
@@ -930,7 +996,7 @@ h4, strong {
 
   .project-list {
     grid-template-columns: max-content minmax(0, 1fr);
-    column-gap: 16px;
+    column-gap: 12px;
   }
 
   .project-list li {
@@ -947,8 +1013,8 @@ h4, strong {
     --page-gutter: 20px;
     --body-size: 16px;
     --nav-item-height: 36px;
-    --entry-date-width: 113px;
-    --entry-column-gap: 13px;
+    --timeline-date-width: 113px;
+    --timeline-column-gap: 13px;
     --page-title-size: 28px;
     --section-title-size: 25px;
     --main-padding-top: 24px;
@@ -976,7 +1042,7 @@ h4, strong {
     gap: 22px;
   }
 
-  .brand-name {
+  .brand {
     font-size: 23px;
   }
 
@@ -986,13 +1052,13 @@ h4, strong {
 
   .primary-nav {
     --nav-edge-gap: 5px;
+    --nav-font-size: 14px;
     justify-content: space-between;
     gap: 8px;
   }
 
   .primary-nav a {
     padding-inline: 12px;
-    font-size: 14px;
   }
 
   #about-title {
@@ -1000,12 +1066,12 @@ h4, strong {
   }
 
   .research-tabs {
+    --nav-font-size: 15px;
     gap: 5px;
   }
 
   .research-tabs a {
-    padding-inline: 13px;
-    font-size: 15px;
+    padding-inline: clamp(4px, calc(10vw - 28px), 13px);
   }
 
   .research-panel {
@@ -1022,11 +1088,7 @@ h4, strong {
     padding-top: 26px;
   }
 
-  .timeline h4, .entry-date {
-    font-size: 14px;
-  }
-
-  .timeline p {
+  .timeline h4, .timeline .entry-date, .timeline p {
     font-size: 14px;
   }
 
@@ -1041,8 +1103,8 @@ h4, strong {
 
 /* Left-align text on narrow screens to avoid stretched word spacing. */
 @media screen and (max-width: 600px) {
-  .about-bio, .research-goal, .paper-reference, .research-prose {
-    text-align: left;
+  :root {
+    --prose-align: left;
   }
 }
 
