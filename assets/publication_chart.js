@@ -1,7 +1,7 @@
 (() => {
   'use strict';
 
-  const series = [
+  const AUTHORSHIP_SERIES = [
     ['first', 'First author'],
     ['corresponding', 'Corresponding author (non-first)'],
     ['other', 'Other co-author'],
@@ -16,10 +16,13 @@
 
     const columns = years.map(year => ({ year }));
     const totals = {};
-    for (const [key] of series) {
+    for (const [key] of AUTHORSHIP_SERIES) {
       const counts = table[key];
-      if (!Array.isArray(counts) || counts.length !== years.length ||
-          counts.some(count => !Number.isSafeInteger(count) || count < 0)) {
+      if (
+        !Array.isArray(counts) ||
+        counts.length !== years.length ||
+        counts.some(count => !Number.isSafeInteger(count) || count < 0)
+      ) {
         throw new Error(`The "${key}" row needs one nonnegative integer per year.`);
       }
       totals[key] = 0;
@@ -34,22 +37,28 @@
 
   function svgElement(tag, attributes, text) {
     const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
-    for (const [name, value] of Object.entries(attributes)) node.setAttribute(name, value);
+    for (const [name, value] of Object.entries(attributes)) {
+      node.setAttribute(name, value);
+    }
     if (text !== undefined) node.textContent = text;
     return node;
   }
 
-  function countScale(above, below) {
-    const target = Math.max(1, (above + below) / 6);
+  function countScale(maxAbove, maxBelow) {
+    const target = Math.max(1, (maxAbove + maxBelow) / 6);
     const power = 10 ** Math.floor(Math.log10(target));
     const step = power * [1, 2, 5, 10].find(factor => factor * power >= target);
-    return { high: Math.max(1, Math.ceil(above / step)) * step, low: -Math.ceil(below / step) * step, step };
+    return {
+      high: Math.max(1, Math.ceil(maxAbove / step)) * step,
+      low: -Math.ceil(maxBelow / step) * step,
+      step,
+    };
   }
 
   function createLegend(counts) {
     const list = document.createElement('ul');
     list.className = 'publication-legend';
-    for (const [key, label] of series) {
+    for (const [key, label] of AUTHORSHIP_SERIES) {
       const item = document.createElement('li');
       item.dataset.series = key;
       const number = document.createElement('span');
@@ -71,7 +80,9 @@
     tip.hidden = true;
     figure.append(tip);
 
-    function hide() { tip.hidden = true; }
+    function hide() {
+      tip.hidden = true;
+    }
 
     function show(column, group) {
       const year = document.createElement('strong');
@@ -86,7 +97,10 @@
       const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
       const topLimit = Math.max(frame.top, headerBottom, 0);
       const bottomLimit = Math.min(plot.bottom, document.documentElement.clientHeight);
-      if (bottomLimit - topLimit < height) return hide();
+      if (bottomLimit - topLimit < height) {
+        hide();
+        return;
+      }
 
       const gap = 8;
       let left = anchor.left + (anchor.width - width) / 2;
@@ -108,26 +122,35 @@
   }
 
   function createYearColumn(column, x, yForCount, tooltip) {
-    const counts = series.map(([key, label]) => `${column[key]} × ${label}`);
+    const counts = AUTHORSHIP_SERIES.map(([key, label]) => `${column[key]} × ${label}`);
     const group = svgElement('g', {
-      class: 'publication-column', tabindex: 0, role: 'img',
+      class: 'publication-column',
+      tabindex: 0,
+      role: 'img',
       'pointer-events': 'bounding-box',
       'aria-label': [column.year, ...counts].join('. '),
     });
 
-    const bases = { first: 0, corresponding: column.first, other: -column.other };
-    for (const [key] of series) {
+    const baseCounts = { first: 0, corresponding: column.first, other: -column.other };
+    for (const [key] of AUTHORSHIP_SERIES) {
       const count = column[key];
       if (count === 0) continue;
-      const bottom = bases[key];
+      const bottom = baseCounts[key];
       const top = yForCount(bottom + count);
       group.append(svgElement('rect', {
-        class: 'publication-bar', 'data-series': key, x,
-        y: top, height: yForCount(bottom) - top,
+        class: 'publication-bar',
+        'data-series': key,
+        x,
+        y: top,
+        height: yForCount(bottom) - top,
       }));
     }
     group.append(svgElement('text', {
-      x, y: yForCount(0), dy: '1.2em', 'text-anchor': 'middle', class: 'publication-year',
+      class: 'publication-year',
+      x,
+      y: yForCount(0),
+      dy: '1.2em',
+      'text-anchor': 'middle',
     }, column.year));
 
     const showTooltip = () => tooltip.show(column, group);
@@ -138,11 +161,31 @@
     return group;
   }
 
+  function drawCountAxis(axis, plot, scale, yForCount) {
+    for (let value = scale.low; value <= scale.high; value += scale.step) {
+      const y = yForCount(value);
+      axis.append(svgElement('text', {
+        x: '100%',
+        dx: -7,
+        y,
+        dy: '.35em',
+        'text-anchor': 'end',
+      }, Math.abs(value)));
+      plot.append(svgElement('line', {
+        x1: 0,
+        x2: '100%',
+        y1: y,
+        y2: y,
+        class: value === 0 ? 'publication-zero' : 'publication-gridline',
+      }));
+    }
+  }
+
   function drawPublicationChart(figure) {
     const { columns, totals } = readPublicationTable(figure);
     const scale = countScale(
       Math.max(...columns.map(column => column.first + column.corresponding)),
-      Math.max(...columns.map(column => column.other))
+      Math.max(...columns.map(column => column.other)),
     );
     const plotHeight = 200;
     const yForCount = count => 12 + (scale.high - count) * plotHeight / (scale.high - scale.low);
@@ -160,16 +203,16 @@
     const frame = document.createElement('div');
     frame.className = 'publication-plot';
     const axis = svgElement('svg', { width: '100%', height, 'aria-hidden': 'true' });
-    const plot = svgElement('svg', { width: '100%', height, role: 'group', 'aria-label': 'Papers by year and authorship' });
+    const plot = svgElement('svg', {
+      width: '100%',
+      height,
+      role: 'group',
+      'aria-label': 'Papers by year and authorship',
+    });
 
-    for (let value = scale.low; value <= scale.high; value += scale.step) {
-      const tickY = yForCount(value);
-      axis.append(svgElement('text', { x: '100%', dx: -7, y: tickY, dy: '.35em', 'text-anchor': 'end' }, Math.abs(value)));
-      plot.append(svgElement('line', { x1: 0, x2: '100%', y1: tickY, y2: tickY, class: value === 0 ? 'publication-zero' : 'publication-gridline' }));
-    }
-
+    drawCountAxis(axis, plot, scale, yForCount);
     columns.forEach((column, index) => {
-      const x = `${(index + .5) * slot}%`;
+      const x = `${(index + 0.5) * slot}%`;
       plot.append(createYearColumn(column, x, yForCount, tooltip));
     });
 
@@ -177,7 +220,9 @@
     scroll.append(frame);
     scroll.addEventListener('scroll', tooltip.hide);
     window.addEventListener('resize', tooltip.hide);
-    figure.addEventListener('keydown', event => { if (event.key === 'Escape') tooltip.hide(); });
+    figure.addEventListener('keydown', event => {
+      if (event.key === 'Escape') tooltip.hide();
+    });
     figure.querySelector('figcaption').after(createLegend(totals), scroll);
   }
 

@@ -39,10 +39,10 @@
         </svg>
       </div>
       <nav class="primary-nav" aria-label="Main navigation">
-        <!-- data-page matches the section ID; aria-current marks the default page. -->
-        <a href="#about" data-page="about" aria-current="page">About Me</a>
-        <a href="#research" data-page="research">Research</a>
-        <a href="#teaching" data-page="teaching">Teaching</a>
+        <!-- Each fragment names its section. aria-current marks the default page. -->
+        <a href="#about" aria-current="page">About Me</a>
+        <a href="#research">Research</a>
+        <a href="#teaching">Teaching</a>
       </nav>
     </div>
   </header>
@@ -51,8 +51,16 @@
     <section id="about" class="page" aria-labelledby="about-title">
       <div class="about-intro">
         <div class="intro-main">
-          <h1 id="about-title" tabindex="-1"><span class="latin-name">Shuxun Tian</span> <span class="chinese-name" lang="zh-CN">田树旬</span></h1>
-          <p class="about-bio">I am a lecturer and M.Sc. supervisor in the Department of Astronomy at Beijing Normal University. My research focuses on extensions of general relativity from the fluid side and quasi-static alternatives to inflation. Highlights of my work include gravitational caloric theory, black holes with conical infinity, and a microlensing method for testing gravity.</p>
+          <h1 id="about-title" tabindex="-1">
+            <span class="latin-name">Shuxun Tian</span>
+            <span class="chinese-name" lang="zh-CN">田树旬</span>
+          </h1>
+          <p class="about-bio">
+            I am a lecturer and M.Sc. supervisor in the Department of Astronomy at Beijing Normal
+            University. My research focuses on extensions of general relativity from the fluid side and
+            quasi-static alternatives to inflation. Highlights of my work include gravitational caloric
+            theory, black holes with conical infinity, and a microlensing method for testing gravity.
+          </p>
         </div>
         <aside id="contact" class="contact-note" aria-labelledby="contact-title" tabindex="-1">
           <h2 id="contact-title" class="small-heading">Contact</h2>
@@ -118,18 +126,27 @@
         <section id="interests" aria-labelledby="interests-title" tabindex="-1">
           <h2 id="interests-title" class="research-summary-title">Interests:</h2>
           <ul class="research-summary-list">
-            <li><strong>Gravity Theory:</strong> Extensions of General Relativity from the Fluid Side, Applications to Cosmology and Astrophysics, Observational Tests</li>
-            <li><strong>The Early Universe:</strong> Quasi-Static Alternatives to Inflation, Quantum and Thermal Fluctuations</li>
+            <li>
+              <strong>Gravity Theory:</strong> Extensions of General Relativity from the Fluid Side,
+              Applications to Cosmology and Astrophysics, Observational Tests
+            </li>
+            <li>
+              <strong>The Early Universe:</strong> Quasi-Static Alternatives to Inflation,
+              Quantum and Thermal Fluctuations
+            </li>
           </ul>
         </section>
-        <p class="research-goal">My long-term goal is to uncover new physics in astronomy, with theory identifying where it may arise and observations confirming its existence.</p>
+        <p class="research-goal">
+          My long-term goal is to uncover new physics in astronomy, with theory identifying where it
+          may arise and observations confirming its existence.
+        </p>
       </header>
 
       <!-- For each tab, point aria-controls to the panel ID and the panel's aria-labelledby back to the tab ID. -->
       <nav class="research-tabs" aria-label="Research sections">
         <a id="highlights-tab" href="#highlights" aria-controls="highlights">Highlights</a>
         <a id="publications-tab" href="#publications" aria-controls="publications">Publications</a>
-        <a id="projects-tab" href="#projects" aria-controls="projects">Grants</a>
+        <a id="grants-tab" href="#grants" aria-controls="grants">Grants</a>
         <a id="talks-tab" href="#talks" aria-controls="talks">Talks</a>
       </nav>
 
@@ -142,7 +159,8 @@
              For a badge, add <span data-citation-doi="DOI"></span> with the journal DOI or, for a preprint, the arXiv DOI. -->
         <article id="gravitational-caloric-theory" class="research-entry" aria-labelledby="gct-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/Fig_caloric_black_holes.png" width="1190" height="1043" alt="Caloric black holes" decoding="async">
+            <img src="assets/Fig_caloric_black_holes.png" width="1190" height="1043"
+              alt="Caloric black holes" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
@@ -152,19 +170,34 @@
             <p class="paper-reference">
               <strong>S.&nbsp;X.&nbsp;Tian</strong>,
               Gravitational caloric theory: From early dark energy to a wide variety of gravitational phenomena,
-              <a href="https://link.aps.org/doi/10.1103/ckkf-2t3z" target="_blank" rel="noopener noreferrer">Phys. Rev. D 114, 044042 (2026)</a>.
-              <a class="paper-preprint" href="https://arxiv.org/abs/2608.07318" target="_blank" rel="noopener noreferrer">arXiv:2608.07318</a>.
+              <a href="https://link.aps.org/doi/10.1103/ckkf-2t3z"
+                target="_blank" rel="noopener noreferrer">Phys. Rev. D 114, 044042 (2026)</a>.
+              <a class="paper-preprint" href="https://arxiv.org/abs/2608.07318"
+                target="_blank" rel="noopener noreferrer">arXiv:2608.07318</a>.
               <span data-citation-doi="10.1103/ckkf-2t3z"></span>
             </p>
             <p class="paper-reference">
               <strong>S.&nbsp;X.&nbsp;Tian</strong> and Z.-H.&nbsp;Zhu,
               Black holes with conical infinity in gravitational caloric theory,
               submitted to Phys. Rev. D (2026).
-              <a class="paper-preprint" href="https://arxiv.org/abs/2610.09606" target="_blank" rel="noopener noreferrer">arXiv:2610.09606</a>.
+              <a class="paper-preprint" href="https://arxiv.org/abs/2610.09606"
+                target="_blank" rel="noopener noreferrer">arXiv:2610.09606</a>.
               <span data-citation-doi="10.48550/arXiv.2610.09606"></span>
             </p>
             <div class="research-prose">
-              <p>Gravitational caloric theory generalizes general relativity from the fluid side. The theory has a broad range of cosmological and astrophysical applications, including early dark energy (initial motivation), the early static hot Universe, conical black holes, and gravitational-wave physics. Among these, the following two may have particular astronomical relevance. The early static hot Universe faces theoretical challenges and will be discussed separately. <strong>Conical black holes</strong> in our theory illustrate a distinctive way in which new physics may emerge: spacetime can remain in close agreement with general relativity in the strong-field (near-horizon) and conventional weak-field (e.g., Solar System) regimes, yet approach conical geometry in the extremely weak-field regime. This highlights a possible avenue for the observational search for new physics.</p>
+              <p>
+                Gravitational caloric theory generalizes general relativity from the fluid side. The
+                theory has a broad range of cosmological and astrophysical applications, including early
+                dark energy (initial motivation), the early static hot Universe, conical black holes,
+                and gravitational-wave physics. Among these, the following two may have particular
+                astronomical relevance. The early static hot Universe faces theoretical challenges and
+                will be discussed separately. <strong>Conical black holes</strong> in our theory
+                illustrate a distinctive way in which new physics may emerge: spacetime can remain in
+                close agreement with general relativity in the strong-field (near-horizon) and
+                conventional weak-field (e.g., Solar System) regimes, yet approach conical geometry in
+                the extremely weak-field regime. This highlights a possible avenue for the observational
+                search for new physics.
+              </p>
             </div>
             <section class="selected-works" aria-labelledby="gct-selected-title">
               <h4 id="gct-selected-title">Selected follow-up works</h4>
@@ -176,7 +209,8 @@
 
         <article id="observational-tests" class="research-entry" aria-labelledby="observations-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/Fig_gravity_test_regimes.png" width="1852" height="1414" alt="Gravitational potential and curvature" loading="lazy" decoding="async">
+            <img src="assets/Fig_gravity_test_regimes.png" width="1852" height="1414"
+              alt="Gravitational potential and curvature" loading="lazy" decoding="async">
           </figure>
           <div class="highlight-content">
             <header class="highlight-heading">
@@ -186,12 +220,24 @@
             <p class="paper-reference">
               X.&nbsp;Jin, S.&nbsp;Cao, X.&nbsp;Chen, Y.&nbsp;Nan, X.&nbsp;Tai, and <strong>S.&nbsp;Tian</strong>,
               Testing general relativity with binary lens microlensing events,
-              <a href="https://doi.org/10.3847/2041-8213/ae954b" target="_blank" rel="noopener noreferrer">Astrophys. J. Lett. 1008, L41 (2026)</a>.
-              <a class="paper-preprint" href="https://arxiv.org/abs/2610.11949" target="_blank" rel="noopener noreferrer">arXiv:2610.11949</a>.
+              <a href="https://doi.org/10.3847/2041-8213/ae954b"
+                target="_blank" rel="noopener noreferrer">Astrophys. J. Lett. 1008, L41 (2026)</a>.
+              <a class="paper-preprint" href="https://arxiv.org/abs/2610.11949"
+                target="_blank" rel="noopener noreferrer">arXiv:2610.11949</a>.
               <span data-citation-doi="10.3847/2041-8213/ae954b"></span>
             </p>
             <div class="research-prose">
-              <p>Alternative theories of gravity may predict deviations from general relativity in local gravitational systems. We explore how observations of individual sources with existing or near-future facilities can test these predictions, focusing on regimes that remain poorly constrained. Our current focus is the extremely weak-field regime, motivated in part by conical black holes in gravitational caloric theory (significant deviations from general relativity may emerge only beyond Solar System scales). We hope to identify observational probes that could reveal such new physics. As a step in this direction, we have proposed a binary microlensing method for testing gravity, although it may not be a sufficiently compelling probe of the new physics we seek.</p>
+              <p>
+                Alternative theories of gravity may predict deviations from general relativity in local
+                gravitational systems. We explore how observations of individual sources with existing
+                or near-future facilities can test these predictions, focusing on regimes that remain
+                poorly constrained. Our current focus is the extremely weak-field regime, motivated in
+                part by conical black holes in gravitational caloric theory (significant deviations from
+                general relativity may emerge only beyond Solar System scales). We hope to identify
+                observational probes that could reveal such new physics. As a step in this direction, we
+                have proposed a binary microlensing method for testing gravity, although it may not be a
+                sufficiently compelling probe of the new physics we seek.
+              </p>
             </div>
             <section class="selected-works" aria-labelledby="observations-selected-title">
               <h4 id="observations-selected-title">Selected related works</h4>
@@ -199,22 +245,28 @@
                 <li class="paper-reference">
                   <strong>S.&nbsp;X.&nbsp;Tian</strong> and Z.-H.&nbsp;Zhu,
                   Newtonian approximation and possible time-varying <i>G</i> in nonlocal gravities,
-                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.99.064044" target="_blank" rel="noopener noreferrer">Phys. Rev. D 99, 064044 (2019)</a>.
-                  <a class="paper-preprint" href="https://arxiv.org/abs/1903.11428" target="_blank" rel="noopener noreferrer">arXiv:1903.11428</a>.
+                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.99.064044"
+                    target="_blank" rel="noopener noreferrer">Phys. Rev. D 99, 064044 (2019)</a>.
+                  <a class="paper-preprint" href="https://arxiv.org/abs/1903.11428"
+                    target="_blank" rel="noopener noreferrer">arXiv:1903.11428</a>.
                   <span data-citation-doi="10.1103/PhysRevD.99.064044"></span>
                 </li>
                 <li class="paper-reference">
                   <strong>S.&nbsp;X.&nbsp;Tian</strong> and Z.-H.&nbsp;Zhu,
                   Testing the Schwarzschild metric in a strong field region with the Event Horizon Telescope,
-                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.100.064011" target="_blank" rel="noopener noreferrer">Phys. Rev. D 100, 064011 (2019)</a>.
-                  <a class="paper-preprint" href="https://arxiv.org/abs/1908.11794" target="_blank" rel="noopener noreferrer">arXiv:1908.11794</a>.
+                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.100.064011"
+                    target="_blank" rel="noopener noreferrer">Phys. Rev. D 100, 064011 (2019)</a>.
+                  <a class="paper-preprint" href="https://arxiv.org/abs/1908.11794"
+                    target="_blank" rel="noopener noreferrer">arXiv:1908.11794</a>.
                   <span data-citation-doi="10.1103/PhysRevD.100.064011"></span>
                 </li>
                 <li class="paper-reference">
                   <strong>S.&nbsp;Tian</strong>, S.&nbsp;Hou, S.&nbsp;Cao, and Z.-H.&nbsp;Zhu,
                   Time evolution of the local gravitational parameters and gravitational wave polarizations in a relativistic MOND theory,
-                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.107.044062" target="_blank" rel="noopener noreferrer">Phys. Rev. D 107, 044062 (2023)</a>.
-                  <a class="paper-preprint" href="https://arxiv.org/abs/2302.13304" target="_blank" rel="noopener noreferrer">arXiv:2302.13304</a>.
+                  <a href="https://link.aps.org/doi/10.1103/PhysRevD.107.044062"
+                    target="_blank" rel="noopener noreferrer">Phys. Rev. D 107, 044062 (2023)</a>.
+                  <a class="paper-preprint" href="https://arxiv.org/abs/2302.13304"
+                    target="_blank" rel="noopener noreferrer">arXiv:2302.13304</a>.
                   <span data-citation-doi="10.1103/PhysRevD.107.044062"></span>
                 </li>
               </ul>
@@ -224,7 +276,11 @@
       </section>
 
       <section id="publications" class="research-panel" aria-labelledby="publications-tab" tabindex="-1">
-        <p><strong>Full Publication List:</strong> <a href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw" target="_blank" rel="noopener noreferrer">https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw</a></p>
+        <p>
+          <strong>Full Publication List:</strong>
+          <a href="https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw"
+            target="_blank" rel="noopener noreferrer">https://ui.adsabs.harvard.edu/public-libraries/OO0OYWl2TziFCKu32mfMTw</a>
+        </p>
         <figure class="publication-chart">
           <figcaption>
             <h2>Publications by Year</h2>
@@ -243,13 +299,13 @@
         </figure>
       </section>
 
-      <section id="projects" class="research-panel" aria-labelledby="projects-tab" tabindex="-1">
+      <section id="grants" class="research-panel" aria-labelledby="grants-tab" tabindex="-1">
         <h2 class="visually-hidden">Research Grants</h2>
         <!-- List grants newest first; use data-status="ongoing" or "completed". -->
-        <ol class="project-list">
+        <ol class="grant-list">
           <li data-status="ongoing">
             <span class="entry-date">2025 – 2029</span>
-            <span class="project-role">Participant</span>
+            <span class="grant-role">Participant</span>
             <div>
               <h3>High-frequency gravitational-wave astrophysics with a global observing network</h3>
               <p>National Natural Science Foundation of China (Key Program)</p>
@@ -257,7 +313,7 @@
           </li>
           <li data-status="ongoing">
             <span class="entry-date">2025 – 2027</span>
-            <span class="project-role">Principal Investigator</span>
+            <span class="grant-role">Principal Investigator</span>
             <div>
               <h3>Modeling and cosmological analysis of nonminimally coupled early dark energy</h3>
               <p>National Natural Science Foundation of China (Young Scientists Fund, Type C)</p>
@@ -265,7 +321,7 @@
           </li>
           <li data-status="completed">
             <span class="entry-date">2021 – 2024</span>
-            <span class="project-role">Principal Investigator</span>
+            <span class="grant-role">Principal Investigator</span>
             <div>
               <h3>Theoretical models of early dark energy</h3>
               <p>China Postdoctoral Science Foundation (General Program)</p>
@@ -273,7 +329,7 @@
           </li>
           <li data-status="completed">
             <span class="entry-date">2020 – 2024</span>
-            <span class="project-role">Principal Investigator</span>
+            <span class="grant-role">Principal Investigator</span>
             <div>
               <h3>Possible solutions to the cosmological coincidence problem and their implications</h3>
               <p>China Postdoctoral Science Foundation (Innovative Program)</p>
@@ -319,8 +375,10 @@
   </footer>
 
   <template id="slides-download-template">
-    <a class="slides-download" download>
-      <svg class="slides-download-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <a class="slides-download">
+      <svg class="slides-download-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true" focusable="false">
         <path d="M10 3v9m-3-3 3 3 3-3M4 13v3h12v-3"/>
       </svg>
       <span>Download Slides</span>
@@ -329,7 +387,9 @@
 
   <!-- The link remains available until Dimensions installs the badge. -->
   <template id="citation-badge-template">
-    <span class="citation-badge __dimensions_badge_embed__" data-style="small_rectangle" data-hide-zero-citations="false"><a class="citation-fallback" target="_blank" rel="noopener noreferrer" title="View citation details on Dimensions">Citations</a></span>
+    <span class="citation-badge __dimensions_badge_embed__" data-style="small_rectangle"
+      data-hide-zero-citations="false"><a class="citation-fallback" href="https://badge.dimensions.ai/details/doi/"
+        target="_blank" rel="noopener noreferrer" title="View citation details on Dimensions">Citations</a></span>
   </template>
 
   <script>
@@ -352,7 +412,8 @@
         const tabs = Array.from(researchTabs.querySelectorAll('a'));
         const panels = Array.from(document.querySelectorAll('.research-panel'));
 
-        const defaultPage = document.getElementById(primaryNav.querySelector('[aria-current="page"]').dataset.page);
+        const defaultLink = primaryNav.querySelector('[aria-current="page"]');
+        const defaultPage = document.getElementById(defaultLink.hash.slice(1));
         const researchPage = researchTabs.closest('.page');
         const defaultPanel = document.getElementById(tabs[0].getAttribute('aria-controls'));
 
@@ -366,10 +427,14 @@
         // Local files need an explicit filename; hosted pages keep the directory link.
         if (isLocalFile) homeLink.href = 'index.html';
 
-        const pathsById = new Map(pages.map((page) => [page.id, new URL(page.id, siteRoot).pathname]));
-        panels.forEach((panel) => {
-          pathsById.set(panel.id, new URL(panel.closest('.page').id + '/' + panel.id, siteRoot).pathname);
-        });
+        const pathsById = new Map();
+        for (const page of pages) {
+          pathsById.set(page.id, new URL(page.id, siteRoot).pathname);
+        }
+        for (const panel of panels) {
+          const pageId = panel.closest('.page').id;
+          pathsById.set(panel.id, new URL(`${pageId}/${panel.id}`, siteRoot).pathname);
+        }
         const idsByPath = new Map(Array.from(pathsById, ([id, path]) => [path, id]));
 
         function routeHref(targetId) {
@@ -389,8 +454,13 @@
             url = new URL(siteRoot);
             try {
               const candidate = new URL(requested, siteRoot);
-              if (candidate.origin === siteRoot.origin && idsByPath.has(normalizePath(candidate.pathname))) url = candidate;
-            } catch { /* Invalid routes return to the homepage. */ }
+              const path = normalizePath(candidate.pathname);
+              if (candidate.origin === siteRoot.origin && idsByPath.has(path)) {
+                url = candidate;
+              }
+            } catch {
+              // A malformed route falls back to the homepage.
+            }
           }
           const targetId = idsByPath.get(normalizePath(url.pathname));
           if (targetId) {
@@ -400,46 +470,28 @@
           if (url.href !== location.href) history.replaceState(null, '', url.href);
         }
 
-        function navigate(targetId) {
+        function navigate(targetId, tabAction = null) {
           const url = new URL(routeHref(targetId), location.href);
           if (location.href !== url.href) history.pushState(null, '', url.href);
-          showPage(true);
+          showPage(true, tabAction);
         }
 
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         const rootStyle = getComputedStyle(document.documentElement);
         const viewDurationMs = parseFloat(rootStyle.getPropertyValue('--view-motion-ms')) || 160;
         const viewDistancePx = parseFloat(rootStyle.getPropertyValue('--view-motion-distance')) || 14;
-        const viewEasing = rootStyle.getPropertyValue('--motion-easing').trim() || 'cubic-bezier(.2, .7, .3, 1)';
+        const viewEasing = rootStyle.getPropertyValue('--motion-easing').trim() ||
+          'cubic-bezier(0.2, 0.7, 0.3, 1)';
         let activePage = null;
         let activePanel = null;
-        let tabNavigation = null;
         let handledUrl = null;
         let viewAnimation = null;
         let focusRequestId = 0;
 
-        // One moving background per navigation bar.
         const selections = [
-          [primaryNav, '[aria-current="page"]'],
-          [researchTabs, '[aria-selected="true"]']
-        ].map(([nav, selector]) => {
-          // Reserve the active label's width to prevent layout shifts.
-          nav.querySelectorAll('a').forEach((link) => {
-            const label = document.createElement('span');
-            label.className = 'nav-label';
-            label.textContent = link.textContent;
-            const sizer = label.cloneNode(true);
-            sizer.className = 'nav-label-sizer';
-            sizer.setAttribute('aria-hidden', 'true');
-            link.replaceChildren(label, sizer);
-          });
-          const indicator = document.createElement('span');
-          indicator.className = 'nav-selection';
-          indicator.setAttribute('aria-hidden', 'true');
-          indicator.hidden = true;
-          nav.append(indicator);
-          return { nav, selector, indicator };
-        });
+          createNavSelection(primaryNav, '[aria-current="page"]'),
+          createNavSelection(researchTabs, '[aria-selected="true"]'),
+        ];
 
         function positionSelections(animate = false) {
           selections.forEach(({ nav, selector, indicator }) => {
@@ -447,9 +499,9 @@
             if (!selected || !nav.offsetWidth) return;
             const canMove = animate && !indicator.hidden && !reducedMotion.matches;
             indicator.style.transition = canMove ? '' : 'none';
-            indicator.style.width = selected.offsetWidth + 'px';
-            indicator.style.height = selected.offsetHeight + 'px';
-            indicator.style.transform = 'translate(' + selected.offsetLeft + 'px, ' + selected.offsetTop + 'px)';
+            indicator.style.width = `${selected.offsetWidth}px`;
+            indicator.style.height = `${selected.offsetHeight}px`;
+            indicator.style.transform = `translate(${selected.offsetLeft}px, ${selected.offsetTop}px)`;
             indicator.hidden = false;
             nav.classList.add('has-selection');
           });
@@ -460,39 +512,49 @@
           viewAnimation = null;
           if (reducedMotion.matches || !element.animate) return;
           const direction = order.indexOf(element) > order.indexOf(previous) ? 1 : -1;
-          const animation = element.animate([
-            { opacity: .25, transform: 'translateX(' + direction * viewDistancePx + 'px)' },
-            { opacity: 1, transform: 'translateX(0)' }
-          ], { duration: viewDurationMs, easing: viewEasing });
+          const animation = element.animate(
+            [
+              { opacity: 0.25, transform: `translateX(${direction * viewDistancePx}px)` },
+              { opacity: 1, transform: 'translateX(0)' },
+            ],
+            { duration: viewDurationMs, easing: viewEasing },
+          );
           viewAnimation = animation;
           animation.finished.then(() => {
             if (viewAnimation === animation) viewAnimation = null;
           }).catch(() => {}); // Cancelling an earlier transition is expected.
         }
 
-        function showPage(moveFocus = false) {
+        function showPage(moveFocus = false, tabAction = null) {
           handledUrl = location.href;
-          const targetId = (isLocalFile ? location.hash.slice(1) :
-            idsByPath.get(normalizePath(location.pathname))) || defaultPage.id;
-          const target = document.getElementById(targetId);
+          const targetId = isLocalFile
+            ? location.hash.slice(1)
+            : idsByPath.get(normalizePath(location.pathname));
+          const target = document.getElementById(targetId || defaultPage.id);
           const page = target?.closest('.page') || defaultPage;
-          const panelTarget = tabs.includes(target) ? document.getElementById(target.getAttribute('aria-controls')) : target;
+          const panelTarget = tabs.includes(target)
+            ? document.getElementById(target.getAttribute('aria-controls'))
+            : target;
           const panel = panelTarget?.closest('.research-panel') || defaultPanel;
           const previousPage = activePage;
           const previousPanel = activePanel;
           activePage = page;
           activePanel = panel;
-          pages.forEach((item) => { item.hidden = item !== page; });
-          panels.forEach((item) => { item.hidden = item !== panel; });
-          tabs.forEach((tab) => {
+          for (const item of pages) item.hidden = item !== page;
+          for (const item of panels) item.hidden = item !== panel;
+          for (const tab of tabs) {
             const selected = tab.getAttribute('aria-controls') === panel.id;
             tab.setAttribute('aria-selected', String(selected));
             tab.tabIndex = selected ? 0 : -1;
-          });
-          navLinks.forEach((link) => {
-            if (link.dataset.page === page.id) link.setAttribute('aria-current', 'page');
-            else link.removeAttribute('aria-current');
-          });
+          }
+          const pageHref = routeHref(page.id);
+          for (const link of navLinks) {
+            if (link.getAttribute('href') === pageHref) {
+              link.setAttribute('aria-current', 'page');
+            } else {
+              link.removeAttribute('aria-current');
+            }
+          }
           positionSelections(Boolean(previousPage));
 
           if (previousPage && previousPage !== page) {
@@ -501,58 +563,64 @@
             enterView(panel, previousPanel, panels);
           }
 
-          const tabAction = tabNavigation;
-          tabNavigation = null;
+          const focusTab = previousPage === researchPage ? tabAction : null;
           cancelAnimationFrame(focusRequestId);
-          focusRequestId = requestAnimationFrame(() => {
-            const isDeepLink = target && target !== page && page.contains(target) &&
-              !panels.includes(target) && !tabs.includes(target);
-            if (tabAction && previousPage === researchPage) {
-              window.scrollTo({ top: tabAction.scrollY, behavior: 'instant' });
-              tabAction.tab.focus({ preventScroll: true });
-            } else if (isDeepLink) {
-              target.scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
-              if (moveFocus) target.focus({ preventScroll: true });
-            } else {
-              window.scrollTo({ top: 0, behavior: 'instant' });
-              if (moveFocus) page.querySelector('h1').focus({ preventScroll: true });
-            }
-          });
+          focusRequestId = requestAnimationFrame(() => positionView(page, target, focusTab, moveFocus));
         }
 
-        function onUnmodifiedClick(link, action) {
-          link.addEventListener('click', (event) => {
-            if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-            event.preventDefault();
-            action();
-          });
+        function positionView(page, target, tabAction, moveFocus) {
+          if (tabAction) {
+            window.scrollTo({ top: tabAction.scrollY, behavior: 'instant' });
+            tabAction.tab.focus({ preventScroll: true });
+            return;
+          }
+
+          const isDeepLink = target && target !== page && page.contains(target) &&
+            !panels.includes(target) && !tabs.includes(target);
+          if (isDeepLink) {
+            target.scrollIntoView({
+              block: 'start',
+              behavior: reducedMotion.matches ? 'instant' : 'smooth',
+            });
+            if (moveFocus) target.focus({ preventScroll: true });
+            return;
+          }
+
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          if (moveFocus) page.querySelector('h1').focus({ preventScroll: true });
         }
 
         function selectTab(tab) {
-          tabNavigation = { tab, scrollY: window.scrollY };
-          navigate(tab.getAttribute('aria-controls'));
+          navigate(tab.getAttribute('aria-controls'), { tab, scrollY: window.scrollY });
         }
 
-        navLinks.forEach((link) => {
-          link.href = routeHref(link.dataset.page);
-          onUnmodifiedClick(link, () => navigate(link.dataset.page));
+        function tabForKey(key, index) {
+          switch (key) {
+            case 'ArrowRight': return tabs[(index + 1) % tabs.length];
+            case 'ArrowLeft': return tabs[(index - 1 + tabs.length) % tabs.length];
+            case 'Home': return tabs[0];
+            case 'End': return tabs[tabs.length - 1];
+            case ' ': return tabs[index];
+            default: return null;
+          }
+        }
+
+        navLinks.forEach(link => {
+          const targetId = link.hash.slice(1);
+          link.href = routeHref(targetId);
+          onUnmodifiedClick(link, () => navigate(targetId));
         });
         researchTabs.setAttribute('role', 'tablist');
-        panels.forEach((panel) => panel.setAttribute('role', 'tabpanel'));
+        panels.forEach(panel => panel.setAttribute('role', 'tabpanel'));
         tabs.forEach((tab, index) => {
           tab.setAttribute('role', 'tab');
           tab.href = routeHref(tab.getAttribute('aria-controls'));
           onUnmodifiedClick(tab, () => selectTab(tab));
-          tab.addEventListener('keydown', (event) => {
-            let next;
-            if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
-            else if (event.key === 'ArrowLeft') next = (index - 1 + tabs.length) % tabs.length;
-            else if (event.key === 'Home') next = 0;
-            else if (event.key === 'End') next = tabs.length - 1;
-            else if (event.key === ' ') next = index;
-            else return;
+          tab.addEventListener('keydown', event => {
+            const nextTab = tabForKey(event.key, index);
+            if (!nextTab) return;
             event.preventDefault();
-            selectTab(tabs[next]);
+            selectTab(nextTab);
           });
         });
         onUnmodifiedClick(skipLink, () => {
@@ -576,43 +644,73 @@
         });
       }
 
+      function onUnmodifiedClick(link, action) {
+        link.addEventListener('click', event => {
+          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          action();
+        });
+      }
+
+      function createNavSelection(nav, selector) {
+        // Reserve the active label's width to keep adjacent labels in place.
+        for (const link of nav.querySelectorAll('a')) {
+          const label = document.createElement('span');
+          label.className = 'nav-label';
+          label.textContent = link.textContent;
+          const sizer = label.cloneNode(true);
+          sizer.className = 'nav-label-sizer';
+          sizer.setAttribute('aria-hidden', 'true');
+          link.replaceChildren(label, sizer);
+        }
+
+        const indicator = document.createElement('span');
+        indicator.className = 'nav-selection';
+        indicator.setAttribute('aria-hidden', 'true');
+        indicator.hidden = true;
+        nav.append(indicator);
+        return { nav, selector, indicator };
+      }
+
       function initTalkDownloads() {
-        const downloadTemplate = document.getElementById('slides-download-template').content.firstElementChild;
-        document.querySelectorAll('[data-slides]').forEach((placeholder) => {
+        const template = document.getElementById('slides-download-template');
+        for (const placeholder of document.querySelectorAll('[data-slides]')) {
           const filename = placeholder.dataset.slides.trim();
           if (!filename) {
             placeholder.remove();
-            return;
+            continue;
           }
-          const link = downloadTemplate.cloneNode(true);
-          link.href = 'assets/' + encodeURIComponent(filename);
+          const link = template.content.firstElementChild.cloneNode(true);
+          link.href = `assets/${encodeURIComponent(filename)}`;
           link.download = filename;
           placeholder.replaceWith(link);
-        });
+        }
       }
 
       function updateLastModified() {
         // The browser uses file or server metadata and may fall back to the current time.
         const updatedAt = document.getElementById('last-updated');
         const modifiedAt = new Date(document.lastModified);
-        if (!Number.isNaN(modifiedAt.getTime())) {
-          updatedAt.dateTime = modifiedAt.toISOString();
-          updatedAt.textContent = new Intl.DateTimeFormat('en-US', {
-            year: 'numeric', month: 'long', day: 'numeric'
-          }).format(modifiedAt);
-        }
+        if (Number.isNaN(modifiedAt.getTime())) return;
+        updatedAt.dateTime = modifiedAt.toISOString();
+        updatedAt.textContent = new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }).format(modifiedAt);
       }
 
       function initCitationBadges() {
         const placeholders = document.querySelectorAll('[data-citation-doi]');
         if (!placeholders.length) return;
-        const badgeTemplate = document.getElementById('citation-badge-template').content.firstElementChild;
-        placeholders.forEach((placeholder) => {
-          const badge = badgeTemplate.cloneNode(true);
+        const template = document.getElementById('citation-badge-template');
+        for (const placeholder of placeholders) {
+          const badge = template.content.firstElementChild.cloneNode(true);
           badge.dataset.doi = placeholder.dataset.citationDoi.trim();
-          badge.querySelector('.citation-fallback').href = 'https://badge.dimensions.ai/details/doi/' + badge.dataset.doi;
+          const link = badge.querySelector('.citation-fallback');
+          link.href += badge.dataset.doi;
           placeholder.replaceWith(badge);
-        });
+        }
         const script = document.createElement('script');
         script.src = 'https://badge.dimensions.ai/badge.js';
         script.async = true;

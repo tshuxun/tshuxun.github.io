@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shuxun Tian | Beijing Normal University</title>
   <script>
-    // GitHub Pages requires 404.html; index.html restores the path from "route".
+    // The homepage router restores this path and query after a direct visit.
     if (location.protocol !== 'file:') {
-      const home = new URL('/', location.href);
-      home.searchParams.set('route', location.pathname + location.search);
-      location.replace(home.href);
+      const homeUrl = new URL('/', location.href);
+      homeUrl.searchParams.set('route', location.pathname + location.search);
+      location.replace(homeUrl.href);
     }
   </script>
 </head>
