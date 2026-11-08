@@ -269,8 +269,10 @@ strong {
   gap: clamp(6px, 1.25vw, 18px);
 }
 
-.primary-nav a {
-  padding-inline: clamp(10px, 1.05vw, 15px);
+.research-tabs {
+  flex-wrap: wrap;
+  gap: 0 8px;
+  border-block: 1px solid var(--line);
 }
 
 .primary-nav a,
@@ -285,6 +287,14 @@ strong {
   font-size: var(--nav-font-size);
   font-weight: var(--nav-weight);
   line-height: 1.5;
+}
+
+.primary-nav a {
+  padding-inline: clamp(10px, 1.05vw, 15px);
+}
+
+.research-tabs a {
+  padding-inline: 17px;
 }
 
 .nav-label,
@@ -382,7 +392,7 @@ strong {
   letter-spacing: 0;
 }
 
-/* Shared lists and dated entries */
+/* Shared lists, dates and entry titles */
 
 .timeline,
 .grant-list,
@@ -405,14 +415,16 @@ strong {
   align-items: baseline;
 }
 
-.timeline li {
-  grid-template-columns: var(--timeline-date-width) minmax(0, 1fr);
-  column-gap: var(--timeline-column-gap);
-}
-
 .entry-date {
   font-variant-numeric: lining-nums tabular-nums;
   white-space: nowrap;
+}
+
+.grant-list h4,
+.talk-entry h3,
+.course-entry h3 {
+  font-size: var(--entry-title-size);
+  line-height: var(--entry-leading);
 }
 
 /* About Me */
@@ -487,6 +499,11 @@ strong {
   color: var(--accent);
 }
 
+.timeline li {
+  grid-template-columns: var(--timeline-date-width) minmax(0, 1fr);
+  column-gap: var(--timeline-column-gap);
+}
+
 .timeline li:not(:last-child) {
   margin-bottom: 15px;
 }
@@ -549,17 +566,6 @@ strong {
 
 .research-summary-list > li {
   padding-left: 0.15em;
-}
-
-.research-tabs {
-  flex-wrap: wrap;
-  gap: 0 8px;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.research-tabs a {
-  padding-inline: 17px;
 }
 
 .research-panel {
@@ -712,9 +718,10 @@ strong {
 .publication-chart {
   --axis-width: 28px;
   --year-font-size: clamp(12px, 1.1vw, 14px);
+  --min-year-slot: calc(2.5 * var(--year-font-size));
   /* The unused width in each year's slot separates adjacent bars. */
   --year-slot: clamp(
-    calc(2.5 * var(--year-font-size)),
+    var(--min-year-slot),
     calc((100cqi - var(--axis-width)) / var(--chart-years)),
     62px
   );
@@ -861,57 +868,96 @@ strong {
 
 /* Grants */
 
+.grant-group {
+  --grant-indent: 23px;
+}
+
+.grant-group + .grant-group {
+  margin-block-start: 22px;
+}
+
+.grant-group > h3 {
+  margin-block-end: 11px;
+  padding-inline-start: var(--grant-indent);
+  font: var(--weight-normal) 22px/1.25 var(--serif);
+  letter-spacing: -0.02em;
+  break-after: avoid;
+}
+
 .grant-list {
-  display: grid;
-  grid-template-columns: max-content max-content minmax(0, 1fr);
-  column-gap: clamp(24px, 3vw, 40px);
-  width: fit-content;
-  max-width: 100%;
-}
-
-.grant-list li {
-  grid-column: 1 / -1;
-  grid-template-columns: subgrid;
-  padding-block: 18px;
-  padding-inline: clamp(8px, 1.5vw, 12px);
-  border-bottom: 1px solid var(--line);
-  color: var(--heading);
-}
-
-.grant-list li[data-status="completed"] {
-  color: #74767c;
-}
-
-.grant-list li:first-child {
-  padding-top: 0;
-}
-
-.grant-list li:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
-}
-
-.grant-list .entry-date,
-.grant-list .grant-role,
-.grant-list h3 {
-  color: inherit;
-  font-weight: var(--weight-semibold);
-  line-height: 1.5;
-}
-
-.grant-list .entry-date,
-.grant-list .grant-role {
-  font-size: calc(var(--entry-title-size) - 0.5px);
-}
-
-.grant-list h3 {
-  font-size: var(--entry-title-size);
-}
-
-.grant-list p {
-  margin-top: 4px;
+  position: relative;
+  color: #555b65;
   font-size: var(--detail-size);
-  line-height: var(--entry-leading);
+  line-height: var(--body-leading);
+}
+
+/* Each group's rail runs from the first marker to its last line of text. */
+.grant-list::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 4px;
+  inset-block: 0.5lh 4px;
+  border-inline-start: 1px solid #cbd0d6;
+  pointer-events: none;
+}
+
+.grant-list > li {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr);
+  padding-inline-start: var(--grant-indent);
+}
+
+.grant-list > li + li {
+  margin-block-start: 14px;
+}
+
+.grant-list > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.5lh;
+  transform: translateY(-50%);
+  box-sizing: border-box;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid var(--accent);
+  border-radius: 50%;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.grant-group[data-status="completed"] li::before {
+  border-color: var(--muted);
+  background: var(--paper);
+}
+
+.grant-period {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.45em;
+}
+
+.grant-period .entry-date {
+  color: var(--heading);
+  font-weight: var(--weight-medium);
+}
+
+.grant-role::before {
+  content: "·" / "";
+  margin-inline-end: 0.45em;
+}
+
+.grant-list h4 {
+  margin-block: 2px 3px;
+}
+
+.grant-proposal {
+  justify-self: start;
+  max-width: 100%;
+  padding-block-start: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Talks and teaching */
@@ -974,12 +1020,6 @@ strong {
 .course-entry + .course-entry,
 .talk-entry + .talk-entry {
   margin-top: 22px;
-}
-
-.course-entry h3,
-.talk-entry h3 {
-  font-size: var(--entry-title-size);
-  line-height: var(--entry-leading);
 }
 
 .course-terms {
@@ -1063,19 +1103,6 @@ strong {
   .background-columns {
     grid-template-columns: 1fr;
     gap: 25px;
-  }
-
-  .grant-list {
-    grid-template-columns: max-content minmax(0, 1fr);
-    column-gap: 12px;
-  }
-
-  .grant-list li {
-    row-gap: 5px;
-  }
-
-  .grant-list li > div {
-    grid-column: 1 / -1;
   }
 }
 
@@ -1165,19 +1192,24 @@ strong {
     font-size: 14px;
   }
 
-  .grant-list li {
-    padding-block: 16px;
-  }
-
-  .grant-list p {
-    font-size: 14px;
+  .grant-group {
+    --grant-indent: 18px;
   }
 }
 
-/* Left-align text on narrow screens to avoid stretched word spacing. */
 @media screen and (max-width: 600px) {
   :root {
+    /* Avoid stretched word spacing on narrow screens. */
     --prose-align: left;
+  }
+
+  .publication-chart {
+    --min-year-slot: calc(2 * var(--year-font-size));
+    --bar-width: calc(0.65 * var(--year-slot));
+  }
+
+  .publication-century {
+    display: none;
   }
 }
 

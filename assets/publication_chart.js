@@ -44,7 +44,13 @@
     return node;
   }
 
-  function countScale(maxAbove, maxBelow) {
+  function countScale(columns) {
+    let maxAbove = 0;
+    let maxBelow = 0;
+    for (const { first, corresponding, other } of columns) {
+      maxAbove = Math.max(maxAbove, first + corresponding);
+      maxBelow = Math.max(maxBelow, other);
+    }
     const target = Math.max(1, (maxAbove + maxBelow) / 6);
     const power = 10 ** Math.floor(Math.log10(target));
     const step = power * [1, 2, 5, 10].find(factor => factor * power >= target);
@@ -121,6 +127,23 @@
     return { show, hide };
   }
 
+  function createYearLabel(year, x, baseline) {
+    const label = svgElement('text', {
+      class: 'publication-year',
+      x,
+      y: baseline,
+      dy: '1.2em',
+      'text-anchor': 'middle',
+    });
+    // CSS hides only the century on narrow screens.
+    const digits = String(year);
+    label.append(
+      svgElement('tspan', { class: 'publication-century' }, digits.slice(0, -2)),
+      digits.slice(-2),
+    );
+    return label;
+  }
+
   function createYearColumn(column, x, yForCount, tooltip) {
     const counts = AUTHORSHIP_SERIES.map(([key, label]) => `${column[key]} × ${label}`);
     const group = svgElement('g', {
@@ -145,13 +168,7 @@
         height: yForCount(bottom) - top,
       }));
     }
-    group.append(svgElement('text', {
-      class: 'publication-year',
-      x,
-      y: yForCount(0),
-      dy: '1.2em',
-      'text-anchor': 'middle',
-    }, column.year));
+    group.append(createYearLabel(column.year, x, yForCount(0)));
 
     const showTooltip = () => tooltip.show(column, group);
     group.addEventListener('mouseenter', showTooltip);
@@ -183,10 +200,7 @@
 
   function drawPublicationChart(figure) {
     const { columns, totals } = readPublicationTable(figure);
-    const scale = countScale(
-      Math.max(...columns.map(column => column.first + column.corresponding)),
-      Math.max(...columns.map(column => column.other)),
-    );
+    const scale = countScale(columns);
     const plotHeight = 200;
     const yForCount = count => 12 + (scale.high - count) * plotHeight / (scale.high - scale.low);
     const height = Math.max(yForCount(scale.low) + 9, yForCount(0) + 24);

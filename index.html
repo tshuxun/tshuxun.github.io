@@ -7,12 +7,14 @@
   <meta name="theme-color" content="#ffffff">
   <title>Shuxun Tian | Beijing Normal University</title>
   <link rel="stylesheet" href="assets/style.css">
+  <!-- Initialize the requested section before the first paint. -->
+  <script src="assets/site.js" defer blocking="render"></script>
   <script src="assets/publication_chart.js" defer></script>
 </head>
 <body>
   <!-- Page and panel IDs define public URLs. Keep 404.html beside this file for direct visits.
-       In assets/, name figures Fig_<topic> and slide decks SlidesYYYYMMDD_<topic>.
-       Match each asset's filename exactly, including its case and extension. -->
+       In assets/, use Fig_<Topic> for figures and SlidesYYYYMM_<Topic> for slides.
+       Capitalize the topic's first word and match the filename's case and extension. -->
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="header-inner">
@@ -142,7 +144,7 @@
         </p>
       </header>
 
-      <!-- For each tab, point aria-controls to the panel ID and the panel's aria-labelledby back to the tab ID. -->
+      <!-- Connect each tab to its panel with aria-controls. Use the tab ID as the panel's aria-labelledby. -->
       <nav class="research-tabs" aria-label="Research sections">
         <a id="highlights-tab" href="#highlights" aria-controls="highlights">Highlights</a>
         <a id="publications-tab" href="#publications" aria-controls="publications">Publications</a>
@@ -152,14 +154,15 @@
 
       <section id="highlights" class="research-panel" aria-labelledby="highlights-tab" tabindex="-1">
         <h2 class="visually-hidden">Research Highlights</h2>
-        <!-- Copy an article.research-entry per highlight. Give the article and heading unique IDs and link them with aria-labelledby.
-             Set the figure's intrinsic width, height and short alt text. List the main paper first.
-             Use p.paper-reference for core papers and li.paper-reference for selected works (oldest first).
-             Keep author names as published, bold Tian, italicize variables and put punctuation outside links.
-             For a badge, add <span data-citation-doi="DOI"></span> with the journal DOI or, for a preprint, the arXiv DOI. -->
+        <!-- Add one article.research-entry per highlight. Give the article and its heading unique
+             IDs and connect them with aria-labelledby. Set the figure's intrinsic size and alt text.
+             Use p.paper-reference for core papers (main paper first) and li.paper-reference for
+             selected works (oldest first). Keep author names as published, bold Tian, italicize
+             variables and put punctuation outside links. For a citation badge, set data-citation-doi
+             on an empty span to the journal DOI or, for a preprint, the arXiv DOI. -->
         <article id="gravitational-caloric-theory" class="research-entry" aria-labelledby="gct-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/Fig_caloric_black_holes.png" width="1190" height="1043"
+            <img src="assets/Fig_Caloric_black_holes.png" width="1190" height="1043"
               alt="Caloric black holes" decoding="async">
           </figure>
           <div class="highlight-content">
@@ -209,7 +212,7 @@
 
         <article id="observational-tests" class="research-entry" aria-labelledby="observations-title" tabindex="-1">
           <figure class="highlight-figure">
-            <img src="assets/Fig_gravity_test_regimes.png" width="1852" height="1414"
+            <img src="assets/Fig_Gravity_test_regimes.png" width="1852" height="1414"
               alt="Gravitational potential and curvature" loading="lazy" decoding="async">
           </figure>
           <div class="highlight-content">
@@ -301,56 +304,66 @@
 
       <section id="grants" class="research-panel" aria-labelledby="grants-tab" tabindex="-1">
         <h2 class="visually-hidden">Research Grants</h2>
-        <!-- List grants newest first; use data-status="ongoing" or "completed". -->
-        <ol class="grant-list">
-          <li data-status="ongoing">
-            <span class="entry-date">2025 – 2029</span>
-            <span class="grant-role">Participant</span>
-            <div>
-              <h3>High-frequency gravitational-wave astrophysics with a global observing network</h3>
+        <!-- List grants newest first within each group. Link a public proposal after the funding
+             source with <a class="grant-proposal" href="…">Grant proposal</a>. -->
+        <section class="grant-group" data-status="ongoing" aria-labelledby="grants-ongoing-title">
+          <h3 id="grants-ongoing-title">Ongoing</h3>
+          <ol class="grant-list">
+            <li>
+              <p class="grant-period">
+                <span class="entry-date">2025 – 2029</span>
+                <span class="grant-role">Participant</span>
+              </p>
+              <h4>High-frequency gravitational-wave astrophysics with a global observing network</h4>
               <p>National Natural Science Foundation of China (Key Program)</p>
-            </div>
-          </li>
-          <li data-status="ongoing">
-            <span class="entry-date">2025 – 2027</span>
-            <span class="grant-role">Principal Investigator</span>
-            <div>
-              <h3>Modeling and cosmological analysis of nonminimally coupled early dark energy</h3>
+            </li>
+            <li>
+              <p class="grant-period">
+                <span class="entry-date">2025 – 2027</span>
+                <span class="grant-role">Principal Investigator</span>
+              </p>
+              <h4>Modeling and cosmological analysis of nonminimally coupled early dark energy</h4>
               <p>National Natural Science Foundation of China (Young Scientists Fund, Type C)</p>
-            </div>
-          </li>
-          <li data-status="completed">
-            <span class="entry-date">2021 – 2024</span>
-            <span class="grant-role">Principal Investigator</span>
-            <div>
-              <h3>Theoretical models of early dark energy</h3>
+            </li>
+          </ol>
+        </section>
+        <section class="grant-group" data-status="completed" aria-labelledby="grants-completed-title">
+          <h3 id="grants-completed-title">Completed</h3>
+          <ol class="grant-list">
+            <li>
+              <p class="grant-period">
+                <span class="entry-date">2021 – 2024</span>
+                <span class="grant-role">Principal Investigator</span>
+              </p>
+              <h4>Theoretical models of early dark energy</h4>
               <p>China Postdoctoral Science Foundation (General Program)</p>
-            </div>
-          </li>
-          <li data-status="completed">
-            <span class="entry-date">2020 – 2024</span>
-            <span class="grant-role">Principal Investigator</span>
-            <div>
-              <h3>Possible solutions to the cosmological coincidence problem and their implications</h3>
+            </li>
+            <li>
+              <p class="grant-period">
+                <span class="entry-date">2020 – 2024</span>
+                <span class="grant-role">Principal Investigator</span>
+              </p>
+              <h4>Possible solutions to the cosmological coincidence problem and their implications</h4>
               <p>China Postdoctoral Science Foundation (Innovative Program)</p>
-            </div>
-          </li>
-        </ol>
+            </li>
+          </ol>
+        </section>
       </section>
 
       <section id="talks" class="research-panel" aria-labelledby="talks-tab" tabindex="-1">
         <h2 class="visually-hidden">Talks</h2>
-        <!-- List talks newest first (Month D, YYYY). For an attachment, add a span with data-slides set to its filename in assets/. -->
+        <!-- List talks newest first (Month D, YYYY). For slides, set data-slides on an empty
+             span to the exact filename in assets/. -->
         <ul class="talk-list">
           <li class="talk-entry">
             <div class="talk-heading">
               <h3>Black holes with conical infinity in gravitational caloric theory</h3>
-              <span data-slides="Slides20261031_Black_holes_with_conical_infinity_in_GCT.html"></span>
+              <span data-slides="Slides202610_Black_holes_with_conical_infinity_in_GCT.html"></span>
             </div>
             <p class="talk-details">
               <span>October 31, 2026</span> ·
               <span>Hangzhou, China</span> ·
-              <span>2026 Hangzhou Workshop on Gravity and Cosmology</span>
+              <span>2026 Hangzhou Workshop on Gravitation and Cosmology</span>
             </p>
           </li>
         </ul>
@@ -391,333 +404,5 @@
       data-hide-zero-citations="false"><a class="citation-fallback" href="https://badge.dimensions.ai/details/doi/"
         target="_blank" rel="noopener noreferrer" title="View citation details on Dimensions">Citations</a></span>
   </template>
-
-  <script>
-    (() => {
-      'use strict';
-
-      initNavigation();
-      initTalkDownloads();
-      updateLastModified();
-      initCitationBadges();
-
-      function initNavigation() {
-        const main = document.getElementById('main-content');
-        const homeLink = document.querySelector('.brand');
-        const skipLink = document.querySelector('.skip-link');
-        const primaryNav = document.querySelector('.primary-nav');
-        const researchTabs = document.querySelector('.research-tabs');
-        const pages = Array.from(document.querySelectorAll('.page'));
-        const navLinks = primaryNav.querySelectorAll('a');
-        const tabs = Array.from(researchTabs.querySelectorAll('a'));
-        const panels = Array.from(document.querySelectorAll('.research-panel'));
-
-        const defaultLink = primaryNav.querySelector('[aria-current="page"]');
-        const defaultPage = document.getElementById(defaultLink.hash.slice(1));
-        const researchPage = researchTabs.closest('.page');
-        const defaultPanel = document.getElementById(tabs[0].getAttribute('aria-controls'));
-
-        // Keep relative URLs anchored before history changes the address bar.
-        const base = document.createElement('base');
-        base.href = location.href;
-        document.head.prepend(base);
-        const siteRoot = new URL('.', base.href);
-        const isLocalFile = location.protocol === 'file:';
-
-        // Local files need an explicit filename; hosted pages keep the directory link.
-        if (isLocalFile) homeLink.href = 'index.html';
-
-        const pathsById = new Map();
-        for (const page of pages) {
-          pathsById.set(page.id, new URL(page.id, siteRoot).pathname);
-        }
-        for (const panel of panels) {
-          const pageId = panel.closest('.page').id;
-          pathsById.set(panel.id, new URL(`${pageId}/${panel.id}`, siteRoot).pathname);
-        }
-        const idsByPath = new Map(Array.from(pathsById, ([id, path]) => [path, id]));
-
-        function routeHref(targetId) {
-          return isLocalFile ? '#' + targetId : pathsById.get(targetId);
-        }
-
-        function normalizePath(path) {
-          return path.replace(/\/+$/, '') || '/';
-        }
-
-        function restoreRoute() {
-          if (isLocalFile) return;
-          let url = new URL(location.href);
-          // The "route" parameter is shared with the GitHub Pages entry point, 404.html.
-          const requested = url.searchParams.get('route');
-          if (requested) {
-            url = new URL(siteRoot);
-            try {
-              const candidate = new URL(requested, siteRoot);
-              const path = normalizePath(candidate.pathname);
-              if (candidate.origin === siteRoot.origin && idsByPath.has(path)) {
-                url = candidate;
-              }
-            } catch {
-              // A malformed route falls back to the homepage.
-            }
-          }
-          const targetId = idsByPath.get(normalizePath(url.pathname));
-          if (targetId) {
-            url.pathname = pathsById.get(targetId);
-            url.hash = '';
-          }
-          if (url.href !== location.href) history.replaceState(null, '', url.href);
-        }
-
-        function navigate(targetId, tabAction = null) {
-          const url = new URL(routeHref(targetId), location.href);
-          if (location.href !== url.href) history.pushState(null, '', url.href);
-          showPage(true, tabAction);
-        }
-
-        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const rootStyle = getComputedStyle(document.documentElement);
-        const viewDurationMs = parseFloat(rootStyle.getPropertyValue('--view-motion-ms')) || 160;
-        const viewDistancePx = parseFloat(rootStyle.getPropertyValue('--view-motion-distance')) || 14;
-        const viewEasing = rootStyle.getPropertyValue('--motion-easing').trim() ||
-          'cubic-bezier(0.2, 0.7, 0.3, 1)';
-        let activePage = null;
-        let activePanel = null;
-        let handledUrl = null;
-        let viewAnimation = null;
-        let focusRequestId = 0;
-
-        const selections = [
-          createNavSelection(primaryNav, '[aria-current="page"]'),
-          createNavSelection(researchTabs, '[aria-selected="true"]'),
-        ];
-
-        function positionSelections(animate = false) {
-          selections.forEach(({ nav, selector, indicator }) => {
-            const selected = nav.querySelector(selector);
-            if (!selected || !nav.offsetWidth) return;
-            const canMove = animate && !indicator.hidden && !reducedMotion.matches;
-            indicator.style.transition = canMove ? '' : 'none';
-            indicator.style.width = `${selected.offsetWidth}px`;
-            indicator.style.height = `${selected.offsetHeight}px`;
-            indicator.style.transform = `translate(${selected.offsetLeft}px, ${selected.offsetTop}px)`;
-            indicator.hidden = false;
-            nav.classList.add('has-selection');
-          });
-        }
-
-        function enterView(element, previous, order) {
-          viewAnimation?.cancel();
-          viewAnimation = null;
-          if (reducedMotion.matches || !element.animate) return;
-          const direction = order.indexOf(element) > order.indexOf(previous) ? 1 : -1;
-          const animation = element.animate(
-            [
-              { opacity: 0.25, transform: `translateX(${direction * viewDistancePx}px)` },
-              { opacity: 1, transform: 'translateX(0)' },
-            ],
-            { duration: viewDurationMs, easing: viewEasing },
-          );
-          viewAnimation = animation;
-          animation.finished.then(() => {
-            if (viewAnimation === animation) viewAnimation = null;
-          }).catch(() => {}); // Cancelling an earlier transition is expected.
-        }
-
-        function showPage(moveFocus = false, tabAction = null) {
-          handledUrl = location.href;
-          const targetId = isLocalFile
-            ? location.hash.slice(1)
-            : idsByPath.get(normalizePath(location.pathname));
-          const target = document.getElementById(targetId || defaultPage.id);
-          const page = target?.closest('.page') || defaultPage;
-          const panelTarget = tabs.includes(target)
-            ? document.getElementById(target.getAttribute('aria-controls'))
-            : target;
-          const panel = panelTarget?.closest('.research-panel') || defaultPanel;
-          const previousPage = activePage;
-          const previousPanel = activePanel;
-          activePage = page;
-          activePanel = panel;
-          for (const item of pages) item.hidden = item !== page;
-          for (const item of panels) item.hidden = item !== panel;
-          for (const tab of tabs) {
-            const selected = tab.getAttribute('aria-controls') === panel.id;
-            tab.setAttribute('aria-selected', String(selected));
-            tab.tabIndex = selected ? 0 : -1;
-          }
-          const pageHref = routeHref(page.id);
-          for (const link of navLinks) {
-            if (link.getAttribute('href') === pageHref) {
-              link.setAttribute('aria-current', 'page');
-            } else {
-              link.removeAttribute('aria-current');
-            }
-          }
-          positionSelections(Boolean(previousPage));
-
-          if (previousPage && previousPage !== page) {
-            enterView(page, previousPage, pages);
-          } else if (page === researchPage && previousPanel && previousPanel !== panel) {
-            enterView(panel, previousPanel, panels);
-          }
-
-          const focusTab = previousPage === researchPage ? tabAction : null;
-          cancelAnimationFrame(focusRequestId);
-          focusRequestId = requestAnimationFrame(() => positionView(page, target, focusTab, moveFocus));
-        }
-
-        function positionView(page, target, tabAction, moveFocus) {
-          if (tabAction) {
-            window.scrollTo({ top: tabAction.scrollY, behavior: 'instant' });
-            tabAction.tab.focus({ preventScroll: true });
-            return;
-          }
-
-          const isDeepLink = target && target !== page && page.contains(target) &&
-            !panels.includes(target) && !tabs.includes(target);
-          if (isDeepLink) {
-            target.scrollIntoView({
-              block: 'start',
-              behavior: reducedMotion.matches ? 'instant' : 'smooth',
-            });
-            if (moveFocus) target.focus({ preventScroll: true });
-            return;
-          }
-
-          window.scrollTo({ top: 0, behavior: 'instant' });
-          if (moveFocus) page.querySelector('h1').focus({ preventScroll: true });
-        }
-
-        function selectTab(tab) {
-          navigate(tab.getAttribute('aria-controls'), { tab, scrollY: window.scrollY });
-        }
-
-        function tabForKey(key, index) {
-          switch (key) {
-            case 'ArrowRight': return tabs[(index + 1) % tabs.length];
-            case 'ArrowLeft': return tabs[(index - 1 + tabs.length) % tabs.length];
-            case 'Home': return tabs[0];
-            case 'End': return tabs[tabs.length - 1];
-            case ' ': return tabs[index];
-            default: return null;
-          }
-        }
-
-        navLinks.forEach(link => {
-          const targetId = link.hash.slice(1);
-          link.href = routeHref(targetId);
-          onUnmodifiedClick(link, () => navigate(targetId));
-        });
-        researchTabs.setAttribute('role', 'tablist');
-        panels.forEach(panel => panel.setAttribute('role', 'tabpanel'));
-        tabs.forEach((tab, index) => {
-          tab.setAttribute('role', 'tab');
-          tab.href = routeHref(tab.getAttribute('aria-controls'));
-          onUnmodifiedClick(tab, () => selectTab(tab));
-          tab.addEventListener('keydown', event => {
-            const nextTab = tabForKey(event.key, index);
-            if (!nextTab) return;
-            event.preventDefault();
-            selectTab(nextTab);
-          });
-        });
-        onUnmodifiedClick(skipLink, () => {
-          main.focus({ preventScroll: true });
-          main.scrollIntoView({ block: 'start' });
-        });
-
-        function restoreHistory() {
-          // Handle popstate and hashchange only once per URL.
-          if (location.href !== handledUrl) showPage(true);
-        }
-        window.addEventListener('popstate', restoreHistory);
-        window.addEventListener('hashchange', restoreHistory);
-        restoreRoute();
-        showPage();
-        window.addEventListener('resize', () => positionSelections());
-        if (document.fonts?.ready) document.fonts.ready.then(() => positionSelections());
-        reducedMotion.addEventListener('change', () => {
-          if (reducedMotion.matches) viewAnimation?.cancel();
-          positionSelections();
-        });
-      }
-
-      function onUnmodifiedClick(link, action) {
-        link.addEventListener('click', event => {
-          if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-          event.preventDefault();
-          action();
-        });
-      }
-
-      function createNavSelection(nav, selector) {
-        // Reserve the active label's width to keep adjacent labels in place.
-        for (const link of nav.querySelectorAll('a')) {
-          const label = document.createElement('span');
-          label.className = 'nav-label';
-          label.textContent = link.textContent;
-          const sizer = label.cloneNode(true);
-          sizer.className = 'nav-label-sizer';
-          sizer.setAttribute('aria-hidden', 'true');
-          link.replaceChildren(label, sizer);
-        }
-
-        const indicator = document.createElement('span');
-        indicator.className = 'nav-selection';
-        indicator.setAttribute('aria-hidden', 'true');
-        indicator.hidden = true;
-        nav.append(indicator);
-        return { nav, selector, indicator };
-      }
-
-      function initTalkDownloads() {
-        const template = document.getElementById('slides-download-template');
-        for (const placeholder of document.querySelectorAll('[data-slides]')) {
-          const filename = placeholder.dataset.slides.trim();
-          if (!filename) {
-            placeholder.remove();
-            continue;
-          }
-          const link = template.content.firstElementChild.cloneNode(true);
-          link.href = `assets/${encodeURIComponent(filename)}`;
-          link.download = filename;
-          placeholder.replaceWith(link);
-        }
-      }
-
-      function updateLastModified() {
-        // The browser uses file or server metadata and may fall back to the current time.
-        const updatedAt = document.getElementById('last-updated');
-        const modifiedAt = new Date(document.lastModified);
-        if (Number.isNaN(modifiedAt.getTime())) return;
-        updatedAt.dateTime = modifiedAt.toISOString();
-        updatedAt.textContent = new Intl.DateTimeFormat('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        }).format(modifiedAt);
-      }
-
-      function initCitationBadges() {
-        const placeholders = document.querySelectorAll('[data-citation-doi]');
-        if (!placeholders.length) return;
-        const template = document.getElementById('citation-badge-template');
-        for (const placeholder of placeholders) {
-          const badge = template.content.firstElementChild.cloneNode(true);
-          badge.dataset.doi = placeholder.dataset.citationDoi.trim();
-          const link = badge.querySelector('.citation-fallback');
-          link.href += badge.dataset.doi;
-          placeholder.replaceWith(badge);
-        }
-        const script = document.createElement('script');
-        script.src = 'https://badge.dimensions.ai/badge.js';
-        script.async = true;
-        script.charset = 'utf-8';
-        document.body.append(script);
-      }
-    })();
-  </script>
 </body>
 </html>
